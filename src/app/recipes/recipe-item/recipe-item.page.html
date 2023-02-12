@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/recipes"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col>
+      <h2>{{recipe.name}}</h2>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-img src="{{recipe.image}}"></ion-img>
+      <ion-text>{{recipe.time}} minutes</ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-segment [(ngModel)]="selectedTab">
+        <ion-segment-button value="ingredients">
+          Ingredients
+        </ion-segment-button>
+        <ion-segment-button value="instructions">
+          Instructions
+        </ion-segment-button>
+      </ion-segment>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="selectedTab === 'ingredients'">
+    <ion-col>
+      {{recipe.servings}} servings<br />
+      <!-- {{recipe.ingredients | json}} -->
+
+      <ion-list>
+        <ion-item *ngFor="let ingredient of recipe.ingredients">
+          {{ingredient.amount}} {{ingredient.unit}} {{ingredient.name}}
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="selectedTab === 'instructions'">{{recipe.instructions}}</div>
+</ion-content>
