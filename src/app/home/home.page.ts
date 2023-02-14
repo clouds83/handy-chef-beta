@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  activeTab!: any;
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      if (this.router.url.includes('recipes')) {
+        this.activeTab = 'recipes';
+      }
 
-  ngOnInit() {
+      if (this.router.url.includes('shopping-list')) {
+        this.activeTab = 'shopping-list';
+      }
+    });
   }
 
+  ngOnInit() {}
 }

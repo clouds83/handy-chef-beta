@@ -13,8 +13,8 @@ import { AddIngredientPage } from './add-ingredient.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AddIngredientPageRoutingModule
+    AddIngredientPageRoutingModule,
   ],
-  declarations: [AddIngredientPage]
+  declarations: [AddIngredientPage],
 })
 export class AddIngredientPageModule {}

@@ -1,9 +1,98 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-recipe</ion-title>
+    <ion-title>Add Recipe</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSaveRecipe()">
+    <ion-row>
+      <ion-col [ngClass]="{'hide' : step !== 1}">
+        <h2>General</h2>
+        <ion-list>
+          <ion-item counter="true">
+            <ion-label position="floating">Recipe name</ion-label>
+            <ion-input
+              id="name"
+              formControlName="name"
+              maxlength="56"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Servings amount</ion-label>
+            <ion-input
+              id="servings"
+              formControlName="servings"
+              inputmode="numeric"
+              type="number"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Time to cook (minutes)</ion-label>
+            <ion-input
+              formControlName="time"
+              inputmode="numeric"
+              type="number"
+            ></ion-input>
+          </ion-item>
+          <ion-item counter="true">
+            <ion-label position="floating">Instructions</ion-label>
+            <ion-textarea
+              maxlength="1024"
+              formControlName="instructions"
+            ></ion-textarea>
+          </ion-item>
+        </ion-list>
+        <div class="buttons">
+          <ion-button
+            expand="block"
+            color="primary"
+            (click)="nextStep()"
+            [disabled]="!form.get('name')?.valid"
+            >Next</ion-button
+          >
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="{'hide' : step !== 2}">
+        <h2>Image</h2>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Image URL</ion-label>
+            <ion-input id="image" formControlName="image"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="buttons">
+          <ion-button expand="block" color="primary" (click)="nextStep()"
+            >Next</ion-button
+          >
+          <ion-button expand="block" color="light" (click)="previousStep()"
+            >Back</ion-button
+          >
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="{'hide' : step !== 3}">
+        <h2>Ingredients</h2>
+        <ion-list formArrayName="ingredients">
+          <ion-item
+            *ngFor="let ingredient of ingredients.controls, let i = index"
+          >
+            {{ingredient.value.amount}} {{ingredient.value.unit}}
+            {{ingredient.value.name}}
+          </ion-item>
+        </ion-list>
+        <div class="buttons">
+          <ion-button
+            expand="block"
+            color="primary"
+            type="submit"
+            [disabled]="!form.valid"
+            >Save Recipe</ion-button
+          >
+          <ion-button expand="block" color="light" (click)="previousStep()"
+            >Back</ion-button
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

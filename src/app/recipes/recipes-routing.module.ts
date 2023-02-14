@@ -6,16 +6,22 @@ import { RecipesPage } from './recipes.page';
 const routes: Routes = [
   {
     path: '',
-    component: RecipesPage
+    component: RecipesPage,
   },
-  {
-    path: 'recipe-item',
-    loadChildren: () => import('./recipe-item/recipe-item.module').then( m => m.RecipeItemPageModule)
-  },
-  {
-    path: 'add-recipe',
-    loadChildren: () => import('./add-recipe/add-recipe.module').then( m => m.AddRecipePageModule)
-  }
+  // {
+  //   path: 'recipe-item',
+  //   loadChildren: () =>
+  //     import('./recipe-item/recipe-item.module').then(
+  //       (m) => m.RecipeItemPageModule
+  //     ),
+  // },
+  // {
+  //   path: 'add-item',
+  //   loadChildren: () =>
+  //     import('./add-recipe/add-recipe.module').then(
+  //       (m) => m.AddRecipePageModule
+  //     ),
+  // },
 ];
 
 @NgModule({

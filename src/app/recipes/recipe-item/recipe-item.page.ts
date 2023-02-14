@@ -26,7 +26,6 @@ export class RecipeItemPage implements OnInit {
       }
 
       this.recipe = this.recipeService.getRecipe(paramMap.get('id'));
-      console.log(this.recipe);
     });
   }
 }

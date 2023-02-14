@@ -10,22 +10,8 @@ const routes: Routes = [
     children: [
       {
         path: 'recipes',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../recipes/recipes.module').then(
-                (m) => m.RecipesPageModule
-              ),
-          },
-          {
-            path: ':id',
-            loadChildren: () =>
-              import('../recipes/recipe-item/recipe-item.module').then(
-                (m) => m.RecipeItemPageModule
-              ),
-          },
-        ],
+        loadChildren: () =>
+          import('../recipes/recipes.module').then((m) => m.RecipesPageModule),
       },
       {
         path: 'shopping-list',
@@ -41,6 +27,30 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'recipes/add-item',
+    loadChildren: () =>
+      import('../recipes/add-recipe/add-recipe.module').then(
+        (m) => m.AddRecipePageModule
+      ),
+  },
+
+  {
+    path: 'shopping-list/add-item',
+    loadChildren: () =>
+      import('../shared/add-ingredient/add-ingredient.module').then(
+        (m) => m.AddIngredientPageModule
+      ),
+  },
+
+  {
+    path: 'recipes/:id',
+    loadChildren: () =>
+      import('../recipes/recipe-item/recipe-item.module').then(
+        (m) => m.RecipeItemPageModule
+      ),
+  },
+
   {
     path: '',
     redirectTo: '/home/recipes',
