@@ -1,9 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-ingredient</ion-title>
+    <ion-title>Add Ingredient</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col [formGroup]="form">
+      <form>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input id="amount" formControlName="amount"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Unit</ion-label>
+            <ion-input id="unit" formControlName="unit"></ion-input>
+          </ion-item>
+          <ion-item counter="true">
+            <ion-label position="floating">Ingredient</ion-label>
+            <ion-input
+              id="ingredient"
+              formControlName="ingredient"
+              maxlength="56"
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+      </form>
+    </ion-col>
+  </ion-row>
 </ion-content>
