@@ -7,6 +7,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RecipeService } from 'src/app/shared/services/recipe.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -17,7 +19,11 @@ export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private recipeService: RecipeService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -25,6 +31,7 @@ export class AddRecipePage implements OnInit {
 
   initializeForm() {
     this.form = new FormGroup({
+      id: new FormControl('3'),
       name: new FormControl('Lorem ipsum', {
         updateOn: 'change',
         validators: [
@@ -79,6 +86,7 @@ export class AddRecipePage implements OnInit {
   }
 
   onSaveRecipe() {
-    console.log(this.form.value);
+    this.recipeService.addRecipe(this.form.value);
+    this.router.navigateByUrl('/');
   }
 }

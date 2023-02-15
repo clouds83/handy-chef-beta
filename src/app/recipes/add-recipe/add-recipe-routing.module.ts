@@ -6,8 +6,15 @@ import { AddRecipePage } from './add-recipe.page';
 const routes: Routes = [
   {
     path: '',
-    component: AddRecipePage
-  }
+    component: AddRecipePage,
+  },
+  {
+    path: 'add-ingredient',
+    loadChildren: () =>
+      import('../../shared/add-ingredient/add-ingredient.module').then(
+        (m) => m.AddIngredientPageModule
+      ),
+  },
 ];
 
 @NgModule({

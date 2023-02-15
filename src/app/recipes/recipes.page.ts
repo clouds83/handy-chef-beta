@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { of, Subscription } from 'rxjs';
 import { Recipe } from '../shared/models/recipe.model';
 import { RecipeService } from '../shared/services/recipe.service';
 
@@ -9,10 +10,19 @@ import { RecipeService } from '../shared/services/recipe.service';
 })
 export class RecipesPage implements OnInit {
   loadedRecipes!: Recipe[];
+  subscription!: Subscription;
+
+  recipes$ = of(this.loadedRecipes);
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {
+    this.subscription = this.recipeService.recipesChanged.subscribe(
+      (recipesUpdated) => {
+        this.loadedRecipes = recipesUpdated;
+      }
+    );
+
     this.loadedRecipes = this.recipeService.recipes;
   }
 }
