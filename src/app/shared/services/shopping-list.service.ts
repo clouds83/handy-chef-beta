@@ -9,17 +9,17 @@ export class ShoppingListService {
     {
       amount: 1000,
       unit: 'grams',
-      name: 'Feijão',
+      ingredient: 'Feijão',
     },
     {
       amount: 2,
       unit: '',
-      name: 'Cebola',
+      ingredient: 'Cebola',
     },
     {
       amount: 200,
       unit: 'ml',
-      name: 'Leite',
+      ingredient: 'Leite',
     },
   ];
 

@@ -20,42 +20,42 @@ export class RecipeService {
         {
           amount: 1,
           unit: '',
-          name: 'Onion',
+          ingredient: 'Onion',
         },
         {
           amount: 250,
           unit: 'grams',
-          name: 'Cheese',
+          ingredient: 'Cheese',
         },
         {
           amount: 0.5,
           unit: 'Kg',
-          name: 'Flour',
+          ingredient: 'Flour',
         },
         {
           amount: 100,
           unit: 'grams',
-          name: 'Olive',
+          ingredient: 'Olive',
         },
         {
           amount: 3,
           unit: '',
-          name: 'Tomato',
+          ingredient: 'Tomato',
         },
         {
           amount: 50,
           unit: 'grams',
-          name: 'Garlic',
+          ingredient: 'Garlic',
         },
         {
           amount: 25,
           unit: 'grams',
-          name: 'Basil',
+          ingredient: 'Basil',
         },
         {
           amount: 50,
           unit: 'grams',
-          name: 'Parmesan',
+          ingredient: 'Parmesan',
         },
       ],
     },
@@ -72,20 +72,23 @@ export class RecipeService {
         {
           amount: 1,
           unit: '',
-          name: 'Feijolão',
+          ingredient: 'Feijolão',
         },
         {
           amount: 250,
           unit: 'grams',
-          name: 'Chinelo',
+          ingredient: 'Chinelo',
         },
       ],
     },
   ];
-
   recipesChanged = new Subject<Recipe[]>();
 
   constructor() {}
+
+  recipeId() {
+    this._recipes.length;
+  }
 
   get recipes() {
     return [...this._recipes];
@@ -93,7 +96,7 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this._recipes.push(recipe);
-    this.recipesChanged.next(this._recipes.slice());
+    this.recipesChanged.next(this._recipes);
   }
 
   getRecipe(id: any) {

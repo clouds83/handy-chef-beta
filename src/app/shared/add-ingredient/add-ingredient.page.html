@@ -11,7 +11,12 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Amount</ion-label>
-            <ion-input id="amount" formControlName="amount"></ion-input>
+            <ion-input
+              id="amount"
+              formControlName="amount"
+              inputmode="numeric"
+              type="number"
+            ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Unit</ion-label>
@@ -22,10 +27,17 @@
             <ion-input
               id="ingredient"
               formControlName="ingredient"
-              maxlength="56"
+              maxlength="16"
             ></ion-input>
           </ion-item>
         </ion-list>
+        <ion-button
+          expand="block"
+          color="dark"
+          (click)="onAddIngredient()"
+          [disabled]="!form.valid"
+          >Add Ingredient</ion-button
+        >
       </form>
     </ion-col>
   </ion-row>

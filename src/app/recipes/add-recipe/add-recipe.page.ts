@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -8,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IngredientService } from 'src/app/shared/services/ingredient.service';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 
 @Component({
@@ -18,10 +19,13 @@ import { RecipeService } from 'src/app/shared/services/recipe.service';
 export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
+  ingredientList: Ingredient[] = this.ingredientService.ingredients;
+  recipeId = (this.recipeService.recipes.length + 1).toString();
 
   constructor(
     private fb: FormBuilder,
     private recipeService: RecipeService,
+    private ingredientService: IngredientService,
     private router: Router
   ) {}
 
@@ -31,8 +35,8 @@ export class AddRecipePage implements OnInit {
 
   initializeForm() {
     this.form = new FormGroup({
-      id: new FormControl('3'),
-      name: new FormControl('Lorem ipsum', {
+      id: new FormControl(this.recipeId),
+      name: new FormControl('Feijoadombers', {
         updateOn: 'change',
         validators: [
           Validators.required,
@@ -53,23 +57,12 @@ export class AddRecipePage implements OnInit {
         }
       ),
       image: new FormControl(
-        'https://play-lh.googleusercontent.com/8QnH9AhsRfhPott7REiFUXXJLRIxi8KMAP0mFAZpYgd44OTOCtScwXeb5oPe1E4eP4oF',
+        'https://img.cybercook.com.br/receitas/776/feijoada.jpeg',
         {
           updateOn: 'change',
         }
       ),
-      ingredients: this.fb.array([
-        {
-          amount: 1,
-          unit: '',
-          name: 'Feijolão',
-        },
-        {
-          amount: 250,
-          unit: 'grams',
-          name: 'Chinelo',
-        },
-      ]),
+      ingredients: this.fb.array([]),
     });
   }
 
@@ -85,8 +78,24 @@ export class AddRecipePage implements OnInit {
     this.step = --this.step;
   }
 
+  addIngredientsToRecipeForm(arr: Ingredient[]) {
+    arr.forEach((item) => {
+      const itemFormGroup = this.fb.group({
+        amount: [item.amount],
+        unit: [item.unit],
+        ingredient: [item.ingredient, Validators.required],
+      });
+      this.ingredients.push(itemFormGroup);
+    });
+  }
+
   onSaveRecipe() {
+    this.addIngredientsToRecipeForm(this.ingredientList);
     this.recipeService.addRecipe(this.form.value);
     this.router.navigateByUrl('/');
+    this.ingredientService.resetIngredients();
+    this.ingredientList = this.ingredientService.ingredients;
+    this.initializeForm();
+    this.step = 1;
   }
 }

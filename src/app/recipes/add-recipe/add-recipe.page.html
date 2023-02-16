@@ -73,11 +73,8 @@
       <ion-col [ngClass]="{'hide' : step !== 3}">
         <h2>Ingredients</h2>
         <ion-list formArrayName="ingredients">
-          <ion-item
-            *ngFor="let ingredient of ingredients.controls, let i = index"
-          >
-            {{ingredient.value.amount}} {{ingredient.value.unit}}
-            {{ingredient.value.name}}
+          <ion-item *ngFor="let ingredient of ingredientList, let i = index">
+            {{ingredient.amount}} {{ingredient.unit}} {{ingredient.ingredient}}
           </ion-item>
         </ion-list>
         <ion-button
