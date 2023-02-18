@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shared/services/shopping-list.service';
 
@@ -8,11 +9,21 @@ import { ShoppingListService } from '../shared/services/shopping-list.service';
   styleUrls: ['./shopping-list.page.scss'],
 })
 export class ShoppingListPage implements OnInit {
-  loadedShoppingList!: Ingredient[];
+  loadedShoppingList: Ingredient[] = this.shoppingListService.shoppingList;
+  subscription!: Subscription;
+  editMode = false;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
-  ngOnInit() {
-    this.loadedShoppingList = this.shoppingListService.shoppingList;
+  ngOnInit() {}
+
+  deleteShoppingItem(index: number) {
+    this.shoppingListService.shoppingList.splice(index, 1);
+    console.log(this.shoppingListService.shoppingList);
+  }
+
+  onEditItem(index: number) {
+    this.editMode = true;
+    //this.subscription = true TODO
   }
 }

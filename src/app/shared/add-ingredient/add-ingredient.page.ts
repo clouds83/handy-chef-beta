@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IngredientService } from '../services/ingredient.service';
 import { RecipeService } from '../services/recipe.service';
+import { ShoppingListService } from '../services/shopping-list.service';
 
 @Component({
   selector: 'app-add-ingredient',
@@ -16,6 +17,7 @@ export class AddIngredientPage implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private ingredientService: IngredientService,
+    private shoppingListService: ShoppingListService,
     private router: Router
   ) {
     this.router.events.subscribe(() => {
@@ -35,13 +37,13 @@ export class AddIngredientPage implements OnInit {
 
   initializeForm() {
     this.form = new FormGroup({
-      amount: new FormControl(null, {
+      amount: new FormControl(1, {
         updateOn: 'change',
       }),
-      unit: new FormControl(null, {
+      unit: new FormControl('2', {
         updateOn: 'change',
       }),
-      ingredient: new FormControl(null, {
+      ingredient: new FormControl('3', {
         updateOn: 'change',
         validators: [Validators.required],
       }),
@@ -57,6 +59,16 @@ export class AddIngredientPage implements OnInit {
       this.initializeForm();
 
       this.router.navigateByUrl('/home/recipes/add-item');
+    }
+
+    if (this.addWhere == 'shopping-list') {
+      const ingredient = this.form.value;
+
+      this.shoppingListService.addShoppingItem(ingredient);
+
+      this.initializeForm();
+
+      this.router.navigateByUrl('/home/shopping-list');
     }
   }
 }

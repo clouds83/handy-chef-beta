@@ -22,7 +22,6 @@ export class RecipesPage implements OnInit {
         this.loadedRecipes = recipesUpdated;
       }
     );
-
     this.loadedRecipes = this.recipeService.recipes;
   }
 }

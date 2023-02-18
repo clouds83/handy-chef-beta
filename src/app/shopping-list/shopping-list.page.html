@@ -8,8 +8,12 @@
   <ion-row>
     <ion-col>
       <ion-list>
-        <ion-item *ngFor="let item of loadedShoppingList">
+        <ion-item *ngFor="let item of loadedShoppingList, let i = index">
           {{item.amount}} {{item.unit}} {{item.ingredient}}
+          <ion-button (click)="onEditItem(i)">EDIT</ion-button>
+          <ion-button color="danger" (click)="deleteShoppingItem(i)"
+            >DELETE</ion-button
+          >
         </ion-item>
       </ion-list>
     </ion-col>

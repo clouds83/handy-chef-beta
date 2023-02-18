@@ -91,7 +91,11 @@ export class RecipeService {
   }
 
   get recipes() {
-    return [...this._recipes];
+    return this._recipes;
+  }
+
+  getRecipe(id: any) {
+    return { ...this._recipes.find((recipe) => recipe.id === id) };
   }
 
   addRecipe(recipe: Recipe) {
@@ -99,7 +103,9 @@ export class RecipeService {
     this.recipesChanged.next(this._recipes);
   }
 
-  getRecipe(id: any) {
-    return { ...this._recipes.find((r) => r.id === id) };
+  deleteRecipe(id: any) {
+    const index = this._recipes.findIndex((recipe) => recipe.id === id);
+    this._recipes.splice(index, 1);
+    this.recipesChanged.next(this._recipes.slice());
   }
 }

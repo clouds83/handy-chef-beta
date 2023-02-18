@@ -26,6 +26,10 @@ export class ShoppingListService {
   constructor() {}
 
   get shoppingList() {
-    return [...this._shoppingList];
+    return this._shoppingList;
+  }
+
+  addShoppingItem(ingredient: Ingredient) {
+    this._shoppingList.push(ingredient);
   }
 }
