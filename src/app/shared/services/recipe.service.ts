@@ -98,14 +98,22 @@ export class RecipeService {
     return { ...this._recipes.find((recipe) => recipe.id === id) };
   }
 
+  getIndex(id: any) {
+    return this._recipes.findIndex((recipe) => recipe.id === id);
+  }
+
   addRecipe(recipe: Recipe) {
     this._recipes.push(recipe);
     this.recipesChanged.next(this._recipes);
   }
 
+  updateRecipe(id: any, newRecipe: Recipe) {
+    this._recipes[this.getIndex(id)] = newRecipe;
+    this.recipesChanged.next(this._recipes.slice());
+  }
+
   deleteRecipe(id: any) {
-    const index = this._recipes.findIndex((recipe) => recipe.id === id);
-    this._recipes.splice(index, 1);
+    this._recipes.splice(this.getIndex(id), 1);
     this.recipesChanged.next(this._recipes.slice());
   }
 }

@@ -34,6 +34,7 @@ export class RecipeItemPage implements OnInit {
 
   onEditRecipe() {
     console.log(this.recipe);
+    this.router.navigate(['edit-recipe'], { relativeTo: this.route });
   }
 
   onDeleteRecipe() {

@@ -6,10 +6,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AddIngredientPage } from 'src/app/shared/add-ingredient/add-ingredient.page';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
+import { Recipe } from 'src/app/shared/models/recipe.model';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -24,15 +25,37 @@ export class AddRecipePage implements OnInit {
   ingredientList: Ingredient[] = [];
   recipeId = uuidv4();
 
+  isUpdating = false;
+  updatingRecipe!: any;
+
   constructor(
     private fb: FormBuilder,
     private recipeService: RecipeService,
     private router: Router,
+    private route: ActivatedRoute,
     private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
     this.initializeForm();
+
+    this.route.paramMap.subscribe((paramMap) => {
+      if (paramMap.has('id')) {
+        this.isUpdating = true;
+        this.updatingRecipe = this.recipeService.getRecipe(paramMap.get('id'));
+
+        this.form.patchValue({
+          id: this.updatingRecipe.id,
+          name: this.updatingRecipe.name,
+          servings: this.updatingRecipe.servings,
+          time: this.updatingRecipe.time,
+          instructions: this.updatingRecipe.instructions,
+          image: this.updatingRecipe.image,
+        });
+
+        this.ingredientList = this.updatingRecipe.ingredients;
+      }
+    });
   }
 
   initializeForm() {
@@ -111,10 +134,20 @@ export class AddRecipePage implements OnInit {
 
   onSaveRecipe() {
     this.pushIngredientsToFormArray(this.ingredientList);
-    this.recipeService.addRecipe(this.form.value);
-    this.router.navigateByUrl('/');
+
+    if (this.isUpdating) {
+      this.recipeService.updateRecipe(this.updatingRecipe.id, this.form.value);
+      console.log('updated');
+    }
+
+    if (!this.isUpdating) {
+      this.recipeService.addRecipe(this.form.value);
+      console.log('saved');
+    }
+
     this.ingredientList = [];
     this.initializeForm();
     this.step = 1;
+    this.router.navigateByUrl('/');
   }
 }
