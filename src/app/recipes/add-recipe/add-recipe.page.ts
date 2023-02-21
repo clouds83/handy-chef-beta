@@ -7,9 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IngredientService } from 'src/app/shared/services/ingredient.service';
+import { ModalController } from '@ionic/angular';
+import { AddIngredientPage } from 'src/app/shared/add-ingredient/add-ingredient.page';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-recipe',
@@ -19,14 +21,14 @@ import { RecipeService } from 'src/app/shared/services/recipe.service';
 export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
-  ingredientList: Ingredient[] = this.ingredientService.ingredients;
+  ingredientList: Ingredient[] = [];
   recipeId = (this.recipeService.recipes.length + 1).toString();
 
   constructor(
     private fb: FormBuilder,
     private recipeService: RecipeService,
-    private ingredientService: IngredientService,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -66,7 +68,7 @@ export class AddRecipePage implements OnInit {
     });
   }
 
-  get ingredients(): FormArray {
+  get ingredientsFormArray(): FormArray {
     return this.form.get('ingredients') as FormArray;
   }
 
@@ -78,23 +80,40 @@ export class AddRecipePage implements OnInit {
     this.step = --this.step;
   }
 
-  addIngredientsToRecipeForm(arr: Ingredient[]) {
+  async onAddIngredient() {
+    const modal = await this.modalCtrl.create({
+      component: AddIngredientPage,
+    });
+
+    modal.onDidDismiss().then((data) => {
+      const ingredient = data.data;
+      if (ingredient) {
+        this.ingredientList.push(ingredient);
+      }
+    });
+    return await modal.present();
+  }
+
+  onDeteleIngredient(index: number) {
+    this.ingredientList.splice(index, 1);
+  }
+
+  pushIngredientsToFormArray(arr: Ingredient[]) {
     arr.forEach((item) => {
-      const itemFormGroup = this.fb.group({
+      const ingredientFormGroup = this.fb.group({
         amount: [item.amount],
         unit: [item.unit],
         ingredient: [item.ingredient, Validators.required],
       });
-      this.ingredients.push(itemFormGroup);
+      this.ingredientsFormArray.push(ingredientFormGroup);
     });
   }
 
   onSaveRecipe() {
-    this.addIngredientsToRecipeForm(this.ingredientList);
+    this.pushIngredientsToFormArray(this.ingredientList);
     this.recipeService.addRecipe(this.form.value);
     this.router.navigateByUrl('/');
-    this.ingredientService.resetIngredients();
-    this.ingredientList = this.ingredientService.ingredients;
+    this.ingredientList = [];
     this.initializeForm();
     this.step = 1;
   }
