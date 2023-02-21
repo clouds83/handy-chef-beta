@@ -33,11 +33,14 @@
         </ion-list>
         <ion-button
           expand="block"
-          color="dark"
+          color="primary"
           (click)="onAddIngredient()"
           [disabled]="!form.valid"
           >Add Ingredient</ion-button
         >
+        <ion-button expand="block" color="light" (click)="onCancel()">
+          Cancel
+        </ion-button>
       </form>
     </ion-col>
   </ion-row>

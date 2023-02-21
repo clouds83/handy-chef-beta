@@ -22,7 +22,7 @@ export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
   ingredientList: Ingredient[] = [];
-  recipeId = (this.recipeService.recipes.length + 1).toString();
+  recipeId = uuidv4();
 
   constructor(
     private fb: FormBuilder,

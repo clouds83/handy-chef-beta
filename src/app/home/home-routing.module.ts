@@ -36,7 +36,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'shopping-list/add-item',
+    path: 'recipes/add-item/add-ingredient',
     loadChildren: () =>
       import('../shared/add-ingredient/add-ingredient.module').then(
         (m) => m.AddIngredientPageModule
@@ -48,6 +48,22 @@ const routes: Routes = [
     loadChildren: () =>
       import('../recipes/recipe-item/recipe-item.module').then(
         (m) => m.RecipeItemPageModule
+      ),
+  },
+
+  {
+    path: 'recipes/:id/add-ingredient',
+    loadChildren: () =>
+      import('../shared/add-ingredient/add-ingredient.module').then(
+        (m) => m.AddIngredientPageModule
+      ),
+  },
+
+  {
+    path: 'shopping-list/add-item',
+    loadChildren: () =>
+      import('../shared/add-ingredient/add-ingredient.module').then(
+        (m) => m.AddIngredientPageModule
       ),
   },
 

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IngredientService } from '../services/ingredient.service';
-import { RecipeService } from '../services/recipe.service';
-import { ShoppingListService } from '../services/shopping-list.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-ingredient',
@@ -14,12 +12,7 @@ export class AddIngredientPage implements OnInit {
   addWhere!: string;
   form!: FormGroup;
 
-  constructor(
-    private recipeService: RecipeService,
-    private ingredientService: IngredientService,
-    private shoppingListService: ShoppingListService,
-    private router: Router
-  ) {
+  constructor(private router: Router, private modalCtrl: ModalController) {
     this.router.events.subscribe(() => {
       if (this.router.url.includes('recipes')) {
         this.addWhere = 'recipes';
@@ -50,25 +43,12 @@ export class AddIngredientPage implements OnInit {
     });
   }
 
+  onCancel() {
+    this.modalCtrl.dismiss();
+  }
+
   onAddIngredient() {
-    if (this.addWhere == 'recipes') {
-      const ingredient = this.form.value;
-
-      this.ingredientService.addIngredient(ingredient);
-
-      this.initializeForm();
-
-      this.router.navigateByUrl('/home/recipes/add-item');
-    }
-
-    if (this.addWhere == 'shopping-list') {
-      const ingredient = this.form.value;
-
-      this.shoppingListService.addShoppingItem(ingredient);
-
-      this.initializeForm();
-
-      this.router.navigateByUrl('/home/shopping-list');
-    }
+    const data = this.form.value;
+    this.modalCtrl.dismiss(data);
   }
 }

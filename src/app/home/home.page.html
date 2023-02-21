@@ -4,7 +4,18 @@
       <ion-tab-button tab="recipes">
         <ion-label>Recipes</ion-label>
       </ion-tab-button>
-      <a class="add" [routerLink]="['/', 'home', activeTab, 'add-item']">+</a>
+      <a
+        *ngIf="activeTab === 'recipes'"
+        class="add"
+        [routerLink]="['/', 'home', 'recipes', 'add-item']"
+        >+</a
+      >
+      <a
+        *ngIf="activeTab === 'shopping-list'"
+        class="add"
+        (click)="addShoppingListItem()"
+        >+</a
+      >
       <ion-tab-button tab="shopping-list">
         <ion-label>Shopping List</ion-label>
       </ion-tab-button>

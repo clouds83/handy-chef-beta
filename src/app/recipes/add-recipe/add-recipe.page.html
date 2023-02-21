@@ -75,12 +75,18 @@
         <ion-list formArrayName="ingredients">
           <ion-item *ngFor="let ingredient of ingredientList, let i = index">
             {{ingredient.amount}} {{ingredient.unit}} {{ingredient.ingredient}}
+            <ion-buttons slot="end">
+              <ion-button>
+                <ion-icon slot="icon-only" name="create-outline"> </ion-icon>
+              </ion-button>
+              <ion-button (click)="onDeteleIngredient(i)">
+                <ion-icon slot="icon-only" name="trash-outline" color="danger">
+                </ion-icon>
+              </ion-button>
+            </ion-buttons>
           </ion-item>
         </ion-list>
-        <ion-button
-          expand="block"
-          color="dark"
-          [routerLink]="['add-ingredient']"
+        <ion-button expand="block" color="dark" (click)="onAddIngredient()"
           >Add ingredient</ion-button
         >
         <div class="buttons">

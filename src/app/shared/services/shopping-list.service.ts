@@ -28,8 +28,4 @@ export class ShoppingListService {
   get shoppingList() {
     return this._shoppingList;
   }
-
-  addShoppingItem(ingredient: Ingredient) {
-    this._shoppingList.push(ingredient);
-  }
 }

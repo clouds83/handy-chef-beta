@@ -29,15 +29,15 @@ export class RecipeItemPage implements OnInit {
 
       this.recipe = this.recipeService.getRecipe(paramMap.get('id'));
       this.id = this.recipe.id;
-
-      console.log(this.recipe);
     });
+  }
+
+  onEditRecipe() {
+    console.log(this.recipe);
   }
 
   onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigateByUrl('/');
-
-    console.log('deletando');
   }
 }

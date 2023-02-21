@@ -19,7 +19,6 @@ export class ShoppingListPage implements OnInit {
 
   deleteShoppingItem(index: number) {
     this.shoppingListService.shoppingList.splice(index, 1);
-    console.log(this.shoppingListService.shoppingList);
   }
 
   onEditItem(index: number) {
