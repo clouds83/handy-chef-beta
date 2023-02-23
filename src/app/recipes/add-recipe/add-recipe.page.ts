@@ -7,10 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { AddIngredientPage } from 'src/app/shared/add-ingredient/add-ingredient.page';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
-import { Recipe } from 'src/app/shared/models/recipe.model';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -31,9 +30,10 @@ export class AddRecipePage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private recipeService: RecipeService,
-    private router: Router,
     private route: ActivatedRoute,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private navCtrl: NavController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -108,10 +108,12 @@ export class AddRecipePage implements OnInit {
       component: AddIngredientPage,
     });
 
-    modal.onDidDismiss().then((data) => {
-      const ingredient = data.data;
-      if (ingredient) {
-        this.ingredientList.push(ingredient);
+    modal.onDidDismiss().then((result) => {
+      if (result.data !== null) {
+        const ingredient = result.data;
+        if (ingredient) {
+          this.ingredientList.push(ingredient);
+        }
       }
     });
     return await modal.present();
@@ -119,6 +121,25 @@ export class AddRecipePage implements OnInit {
 
   onDeteleIngredient(index: number) {
     this.ingredientList.splice(index, 1);
+  }
+
+  async onEditIngredient(index: number, editingIngredient: any) {
+    const modal = await this.modalCtrl.create({
+      component: AddIngredientPage,
+      componentProps: {
+        editingIngredient: editingIngredient,
+      },
+    });
+    console.log(editingIngredient);
+
+    modal.onDidDismiss().then((result) => {
+      if (result.data !== null) {
+        const ingredient = result.data;
+        this.ingredientList[index] = ingredient;
+      }
+      return;
+    });
+    return await modal.present();
   }
 
   pushIngredientsToFormArray(arr: Ingredient[]) {
@@ -137,17 +158,24 @@ export class AddRecipePage implements OnInit {
 
     if (this.isUpdating) {
       this.recipeService.updateRecipe(this.updatingRecipe.id, this.form.value);
-      console.log('updated');
+      this.router.navigate(['/home/recipes', this.updatingRecipe.id], {
+        queryParams: { message: 'Recipe updated sucessfully' },
+      });
     }
 
     if (!this.isUpdating) {
       this.recipeService.addRecipe(this.form.value);
-      console.log('saved');
+      this.router.navigate(['/home/recipes', this.form.value.id], {
+        queryParams: { message: 'Recipe saved sucessfully' },
+      });
     }
 
     this.ingredientList = [];
     this.initializeForm();
     this.step = 1;
-    this.router.navigateByUrl('/');
+  }
+
+  onCancel() {
+    this.navCtrl.back();
   }
 }

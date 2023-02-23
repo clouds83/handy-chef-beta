@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add Recipe</ion-title>
+    <ion-title>{{isUpdating ? 'Edit' : 'Add'}} Recipe</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()">
+        <label>Cancel</label>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -72,11 +78,11 @@
       </ion-col>
       <ion-col [ngClass]="{'hide' : step !== 3}">
         <h2>Ingredients</h2>
-        <ion-list formArrayName="ingredients">
+        <ion-list formArrayName="ingredients" *ngIf="ingredientList.length > 0">
           <ion-item *ngFor="let ingredient of ingredientList, let i = index">
             {{ingredient.amount}} {{ingredient.unit}} {{ingredient.ingredient}}
             <ion-buttons slot="end">
-              <ion-button>
+              <ion-button (click)="onEditIngredient(i, ingredientList[i])">
                 <ion-icon slot="icon-only" name="create-outline"> </ion-icon>
               </ion-button>
               <ion-button (click)="onDeteleIngredient(i)">
@@ -86,6 +92,7 @@
             </ion-buttons>
           </ion-item>
         </ion-list>
+        <p *ngIf="ingredientList.length === 0">No ingredients added</p>
         <ion-button expand="block" color="dark" (click)="onAddIngredient()"
           >Add ingredient</ion-button
         >

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { AddIngredientPage } from '../shared/add-ingredient/add-ingredient.page';
 import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shared/services/shopping-list.service';
 
@@ -9,20 +11,39 @@ import { ShoppingListService } from '../shared/services/shopping-list.service';
   styleUrls: ['./shopping-list.page.scss'],
 })
 export class ShoppingListPage implements OnInit {
-  loadedShoppingList: Ingredient[] = this.shoppingListService.shoppingList;
   subscription!: Subscription;
   editMode = false;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    public shoppingListService: ShoppingListService,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {}
 
-  deleteShoppingItem(index: number) {
-    this.shoppingListService.shoppingList.splice(index, 1);
+  onDeleteShoppingItem(index: number) {
+    this.shoppingListService.getShoppingList().splice(index, 1);
   }
 
-  onEditItem(index: number) {
-    this.editMode = true;
-    //this.subscription = true TODO
+  onClearList() {
+    this.shoppingListService.clearShoppingList();
+  }
+
+  async onEditItem(index: number, editingIngredient: any) {
+    const modal = await this.modalCtrl.create({
+      component: AddIngredientPage,
+      componentProps: {
+        editingIngredient: editingIngredient,
+      },
+    });
+
+    modal.onDidDismiss().then((result) => {
+      if (result.data !== null) {
+        const ingredient = result.data;
+        this.shoppingListService.getShoppingList()[index] = ingredient;
+      }
+      return;
+    });
+    return await modal.present();
   }
 }

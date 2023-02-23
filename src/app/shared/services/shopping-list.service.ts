@@ -25,7 +25,11 @@ export class ShoppingListService {
 
   constructor() {}
 
-  get shoppingList() {
+  getShoppingList() {
     return this._shoppingList;
+  }
+
+  clearShoppingList() {
+    this._shoppingList = [];
   }
 }

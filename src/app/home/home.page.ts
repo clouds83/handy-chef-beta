@@ -37,7 +37,7 @@ export class HomePage implements OnInit {
     modal.onDidDismiss().then((data) => {
       const ingredient = data.data;
       if (ingredient) {
-        this.shoppingListService.shoppingList.push(ingredient);
+        this.shoppingListService.getShoppingList().push(ingredient);
       }
     });
     return await modal.present();

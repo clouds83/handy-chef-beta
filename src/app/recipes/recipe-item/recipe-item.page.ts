@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, NavParams } from '@ionic/angular';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
+import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
+import { ToasterService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -15,26 +17,39 @@ export class RecipeItemPage implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
+    private shoppingListService: ShoppingListService,
     private route: ActivatedRoute,
     private navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private toastService: ToasterService
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
-      if (!paramMap.has('id')) {
-        this.navCtrl.navigateBack('/places/tabs/discover');
-        return;
-      }
-
       this.recipe = this.recipeService.getRecipe(paramMap.get('id'));
       this.id = this.recipe.id;
     });
   }
 
+  backButton() {
+    this.navCtrl.navigateBack('/');
+  }
+
   onEditRecipe() {
-    console.log(this.recipe);
     this.router.navigate(['edit-recipe'], { relativeTo: this.route });
+  }
+
+  onSendToShoppingList() {
+    const selectedIngredients = this.recipe.ingredients.filter(
+      (ingredient: any) => ingredient.selected
+    );
+    this.shoppingListService.getShoppingList().push(...selectedIngredients);
+
+    this.recipe.ingredients.forEach((ingredient: any) => {
+      ingredient.selected = false;
+    });
+
+    this.toastService.greenToast('Items sent successfully');
   }
 
   onDeleteRecipe() {

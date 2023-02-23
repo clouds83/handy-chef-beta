@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavParams } from '@ionic/angular';
 
 import { RecipeItemPageRoutingModule } from './recipe-item-routing.module';
 
@@ -13,8 +13,8 @@ import { RecipeItemPage } from './recipe-item.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RecipeItemPageRoutingModule
+    RecipeItemPageRoutingModule,
   ],
-  declarations: [RecipeItemPage]
+  declarations: [RecipeItemPage],
 })
 export class RecipeItemPageModule {}

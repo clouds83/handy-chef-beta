@@ -5,17 +5,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ng-container *ngFor="let recipe of loadedRecipes, let i = index">
-      <ion-item [routerLink]="['/', 'home', 'recipes', recipe.id]">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="recipe.image"> </ion-img>
-        </ion-thumbnail>
-        <ion-label>
-          <p>{{recipe.name}}</p>
-          <p>{{recipe.time}} minutes</p>
-        </ion-label>
-      </ion-item>
-    </ng-container>
+  <ion-row *ngIf="loadedRecipes.length === 0">
+    <ion-col class="ion-padding"> You have no recipes yet </ion-col>
+  </ion-row>
+
+  <ion-list *ngFor="let recipe of loadedRecipes, let i = index">
+    <ion-item [routerLink]="['/', 'home', 'recipes', recipe.id]">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="recipe.image"> </ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <p>{{recipe.name}}</p>
+        <p>{{recipe.time}} minutes</p>
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

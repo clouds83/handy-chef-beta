@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 export class AddIngredientPage implements OnInit {
   addWhere!: string;
   form!: FormGroup;
+  @Input() editingIngredient: any;
 
   constructor(private router: Router, private modalCtrl: ModalController) {
     this.router.events.subscribe(() => {
@@ -26,29 +27,41 @@ export class AddIngredientPage implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
+
+    if (this.editingIngredient) {
+      this.form.patchValue({
+        amount: this.editingIngredient.amount,
+        unit: this.editingIngredient.unit,
+        ingredient: this.editingIngredient.ingredient,
+      });
+    }
   }
 
   initializeForm() {
     this.form = new FormGroup({
-      amount: new FormControl(1, {
+      amount: new FormControl(null, {
         updateOn: 'change',
       }),
-      unit: new FormControl('2', {
+      unit: new FormControl(null, {
         updateOn: 'change',
       }),
-      ingredient: new FormControl('3', {
+      ingredient: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required],
       }),
     });
   }
 
-  onCancel() {
-    this.modalCtrl.dismiss();
+  onAddIngredient() {
+    if (this.form.valid) {
+      const data = this.form.value;
+      this.modalCtrl.dismiss(data);
+    } else {
+      this.modalCtrl.dismiss();
+    }
   }
 
-  onAddIngredient() {
-    const data = this.form.value;
-    this.modalCtrl.dismiss(data);
+  async onCancel() {
+    await this.modalCtrl.dismiss(null);
   }
 }
