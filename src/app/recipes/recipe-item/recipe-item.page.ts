@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController, NavParams } from '@ionic/angular';
+import { AlertController, NavController, NavParams } from '@ionic/angular';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
 import { ToasterService } from 'src/app/shared/services/toast.service';
@@ -14,6 +14,7 @@ export class RecipeItemPage implements OnInit {
   recipe!: any;
   selectedTab: string = 'ingredients';
   id!: number;
+  selectedIngredients: any = [];
 
   constructor(
     private recipeService: RecipeService,
@@ -21,13 +22,21 @@ export class RecipeItemPage implements OnInit {
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private router: Router,
-    private toastService: ToasterService
+    private toastService: ToasterService,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
       this.recipe = this.recipeService.getRecipe(paramMap.get('id'));
       this.id = this.recipe.id;
+    });
+
+    this.route.queryParams.subscribe((params) => {
+      const message = params['message'];
+      if (message) {
+        this.toastService.greenToast(message);
+      }
     });
   }
 
@@ -40,20 +49,41 @@ export class RecipeItemPage implements OnInit {
   }
 
   onSendToShoppingList() {
-    const selectedIngredients = this.recipe.ingredients.filter(
+    this.selectedIngredients = this.recipe.ingredients.filter(
       (ingredient: any) => ingredient.selected
     );
-    this.shoppingListService.getShoppingList().push(...selectedIngredients);
+    if (this.selectedIngredients.length > 0) {
+      this.shoppingListService
+        .getShoppingList()
+        .push(...this.selectedIngredients);
 
-    this.recipe.ingredients.forEach((ingredient: any) => {
-      ingredient.selected = false;
-    });
+      this.recipe.ingredients.forEach((ingredient: any) => {
+        ingredient.selected = false;
+      });
 
-    this.toastService.greenToast('Items sent successfully');
+      this.toastService.greenToast('Items sent successfully');
+    }
   }
 
-  onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
-    this.router.navigateByUrl('/');
+  async onDeleteRecipe() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm Deletion',
+      message: `Are you sure you want to delete ${this.recipe.name}?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.recipeService.deleteRecipe(this.id);
+            this.router.navigateByUrl('/');
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 }

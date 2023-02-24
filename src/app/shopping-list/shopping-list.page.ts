@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AddIngredientPage } from '../shared/add-ingredient/add-ingredient.page';
 import { Ingredient } from '../shared/models/ingredient.model';
@@ -16,7 +16,8 @@ export class ShoppingListPage implements OnInit {
 
   constructor(
     public shoppingListService: ShoppingListService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {}
@@ -25,8 +26,25 @@ export class ShoppingListPage implements OnInit {
     this.shoppingListService.getShoppingList().splice(index, 1);
   }
 
-  onClearList() {
-    this.shoppingListService.clearShoppingList();
+  async onClearList() {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm Deletion',
+      message: `Are you sure you want to delete all items?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.shoppingListService.clearShoppingList();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   async onEditItem(index: number, editingIngredient: any) {
