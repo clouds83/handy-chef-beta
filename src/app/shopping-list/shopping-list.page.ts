@@ -13,6 +13,7 @@ import { ShoppingListService } from '../shared/services/shopping-list.service';
 export class ShoppingListPage implements OnInit {
   subscription!: Subscription;
   editMode = false;
+  shoppingList = this.shoppingListService.getShoppingList();
 
   constructor(
     public shoppingListService: ShoppingListService,
@@ -23,7 +24,7 @@ export class ShoppingListPage implements OnInit {
   ngOnInit() {}
 
   onDeleteShoppingItem(index: number) {
-    this.shoppingListService.getShoppingList().splice(index, 1);
+    this.shoppingList.splice(index, 1);
   }
 
   async onClearList() {

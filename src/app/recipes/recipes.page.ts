@@ -11,6 +11,7 @@ import { RecipeService } from '../shared/services/recipe.service';
 export class RecipesPage implements OnInit {
   loadedRecipes!: Recipe[];
   subscription!: Subscription;
+  searchTerm: string = '';
 
   recipes$ = of(this.loadedRecipes);
 
@@ -23,5 +24,9 @@ export class RecipesPage implements OnInit {
       }
     );
     this.loadedRecipes = this.recipeService.recipes;
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
   }
 }
