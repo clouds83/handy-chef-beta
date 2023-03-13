@@ -130,7 +130,6 @@ export class AddRecipePage implements OnInit {
         editingIngredient: editingIngredient,
       },
     });
-    console.log(editingIngredient);
 
     modal.onDidDismiss().then((result) => {
       if (result.data !== null) {

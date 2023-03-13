@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AddIngredientPage } from '../shared/add-ingredient/add-ingredient.page';
 import { ShoppingListService } from '../shared/services/shopping-list.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
-    private shoppingListService: ShoppingListService
+    private shoppingListService: ShoppingListService,
+    private storage: Storage
   ) {
     this.router.events.subscribe(() => {
       if (this.router.url.includes('recipes')) {
@@ -37,7 +39,11 @@ export class HomePage implements OnInit {
     modal.onDidDismiss().then((data) => {
       const ingredient = data.data;
       if (ingredient) {
-        this.shoppingListService.getShoppingList().push(ingredient);
+        this.shoppingListService._shoppingList.push(ingredient);
+        this.storage.set(
+          'shoppingList',
+          this.shoppingListService._shoppingList
+        );
       }
     });
     return await modal.present();

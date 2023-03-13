@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Ingredient } from '../models/ingredient.model';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingListService {
-  private _shoppingList: Ingredient[] = [
-    {
-      amount: 1000,
-      unit: 'grams',
-      ingredient: 'Feijão',
-    },
-    {
-      amount: 2,
-      unit: '',
-      ingredient: 'Cebola',
-    },
-    {
-      amount: 200,
-      unit: 'ml',
-      ingredient: 'Leite',
-    },
-  ];
+  public _shoppingList: any = [];
 
-  constructor() {}
+  constructor(public storage: Storage) {}
+
+  async loadShoppingList() {
+    await this.storage.create(); // Initialize the storage service
+
+    // Get data from storage
+    const data = await this.storage.get('shoppingList');
+
+    if (data) {
+      this._shoppingList = data;
+      //this.recipesChanged.next(this._recipes);
+    } else {
+      this._shoppingList = [];
+    }
+  }
 
   getShoppingList() {
     return this._shoppingList;
@@ -31,5 +29,6 @@ export class ShoppingListService {
 
   clearShoppingList() {
     this._shoppingList = [];
+    this.storage.set('shoppingList', this._shoppingList);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, NavController, NavParams } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
 import { ToasterService } from 'src/app/shared/services/toast.service';
@@ -23,7 +24,8 @@ export class RecipeItemPage implements OnInit {
     private navCtrl: NavController,
     private router: Router,
     private toastService: ToasterService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage: Storage
   ) {}
 
   ngOnInit() {
@@ -53,9 +55,8 @@ export class RecipeItemPage implements OnInit {
       (ingredient: any) => ingredient.selected
     );
     if (this.selectedIngredients.length > 0) {
-      this.shoppingListService
-        .getShoppingList()
-        .push(...this.selectedIngredients);
+      this.shoppingListService._shoppingList.push(...this.selectedIngredients);
+      this.storage.set('shoppingList', this.shoppingListService._shoppingList);
 
       this.recipe.ingredients.forEach((ingredient: any) => {
         ingredient.selected = false;

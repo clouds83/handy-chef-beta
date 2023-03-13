@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { Subscription } from 'rxjs';
 import { AddIngredientPage } from '../shared/add-ingredient/add-ingredient.page';
-import { Ingredient } from '../shared/models/ingredient.model';
 import { ShoppingListService } from '../shared/services/shopping-list.service';
 
 @Component({
@@ -13,18 +13,22 @@ import { ShoppingListService } from '../shared/services/shopping-list.service';
 export class ShoppingListPage implements OnInit {
   subscription!: Subscription;
   editMode = false;
-  shoppingList = this.shoppingListService.getShoppingList();
+  //shoppingList = this.shoppingListService.getShoppingList();
 
   constructor(
     public shoppingListService: ShoppingListService,
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage: Storage
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.shoppingListService.loadShoppingList();
+  }
 
   onDeleteShoppingItem(index: number) {
-    this.shoppingList.splice(index, 1);
+    this.shoppingListService._shoppingList.splice(index, 1);
+    this.storage.set('shoppingList', this.shoppingListService._shoppingList);
   }
 
   async onClearList() {
@@ -59,7 +63,11 @@ export class ShoppingListPage implements OnInit {
     modal.onDidDismiss().then((result) => {
       if (result.data !== null) {
         const ingredient = result.data;
-        this.shoppingListService.getShoppingList()[index] = ingredient;
+        this.shoppingListService._shoppingList[index] = ingredient;
+        this.storage.set(
+          'shoppingList',
+          this.shoppingListService._shoppingList
+        );
       }
       return;
     });

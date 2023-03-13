@@ -9,11 +9,11 @@ import { RecipeService } from '../shared/services/recipe.service';
   styleUrls: ['./recipes.page.scss'],
 })
 export class RecipesPage implements OnInit {
-  loadedRecipes!: Recipe[];
+  loadedRecipes: Recipe[] = [];
   subscription!: Subscription;
   searchTerm: string = '';
 
-  recipes$ = of(this.loadedRecipes);
+  //recipes$ = of(this.loadedRecipes);
 
   constructor(private recipeService: RecipeService) {}
 
@@ -23,7 +23,8 @@ export class RecipesPage implements OnInit {
         this.loadedRecipes = recipesUpdated;
       }
     );
-    this.loadedRecipes = this.recipeService.recipes;
+
+    this.loadedRecipes = this.recipeService._recipes;
   }
 
   clearSearch() {

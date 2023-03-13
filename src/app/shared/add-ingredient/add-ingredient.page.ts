@@ -25,7 +25,7 @@ export class AddIngredientPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initializeForm();
 
     if (this.editingIngredient) {
