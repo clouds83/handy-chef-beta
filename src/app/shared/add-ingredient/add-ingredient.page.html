@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Add Ingredient</ion-title>
+    <ion-title class="page-title">Add Ingredient</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,12 +11,7 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Amount</ion-label>
-            <ion-input
-              id="amount"
-              formControlName="amount"
-              inputmode="numeric"
-              type="number"
-            ></ion-input>
+            <ion-input id="amount" formControlName="amount" inputmode="numeric" type="number"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Unit</ion-label>
@@ -24,20 +19,11 @@
           </ion-item>
           <ion-item counter="true">
             <ion-label position="floating">Ingredient</ion-label>
-            <ion-input
-              id="ingredient"
-              formControlName="ingredient"
-              maxlength="16"
-            ></ion-input>
+            <ion-input id="ingredient" formControlName="ingredient" maxlength="16"></ion-input>
           </ion-item>
         </ion-list>
-        <ion-button
-          expand="block"
-          color="primary"
-          (click)="onAddIngredient()"
-          [disabled]="!form.valid"
-          >Save Ingredient</ion-button
-        >
+        <ion-button expand="block" color="primary" (click)="onAddIngredient()" [disabled]="!form.valid">Save
+          Ingredient</ion-button>
         <ion-button expand="block" color="light" (click)="onCancel()">
           Cancel
         </ion-button>

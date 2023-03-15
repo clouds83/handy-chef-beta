@@ -25,6 +25,42 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+:root {
+  --gray-900: #1a2810;
+  --gray-500: #738566;
+  --orange-400: #ff692e;
+  --orange-gradient: #f5652c, #ff8657;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/Inter-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("assets/fonts/Nunito-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+* {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+}
+
 .hide {
   display: none;
 }
@@ -35,4 +71,27 @@
   left: 0;
   right: 0;
   margin: 24px;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  padding-bottom: 30%;
+}
+
+.page-title,
+.empty-text {
+  font-family: Nunito, sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--gray-900);
+}
+
+.empty-text {
+  color: var(--gray-500);
+  text-align: center;
 }

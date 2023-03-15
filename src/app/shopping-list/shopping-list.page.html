@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Shopping List
+    <ion-title class="page-title">Shopping List
       <ion-button fill="clear" size="small" (click)="onClearList()"
         *ngIf="this.shoppingListService.getShoppingList().length > 0">
         <ion-icon slot="icon-only" name="trash-outline" color="danger"></ion-icon>
@@ -9,7 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
+  <div *ngIf="this.shoppingListService.getShoppingList().length === 0" class="centered-content">
+    <ion-img src="../../assets/images/shopping-bag.png" class="image"></ion-img>
+    <ion-text class="empty-text">No shopping<br />
+      items here</ion-text>
+
+  </div>
   <ion-row>
     <ion-col>
       <ion-list *ngIf="this.shoppingListService.getShoppingList().length > 0">
@@ -24,7 +30,7 @@
           </ion-buttons>
         </ion-item>
       </ion-list>
-      <ng-container *ngIf="this.shoppingListService.getShoppingList().length === 0">No shopping items</ng-container>
+
     </ion-col>
   </ion-row>
 </ion-content>

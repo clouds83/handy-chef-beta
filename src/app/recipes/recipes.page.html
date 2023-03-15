@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-item>
       <ion-input type="text" [(ngModel)]="searchTerm" placeholder="Search">
@@ -13,9 +13,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-row *ngIf="loadedRecipes.length === 0">
-    <ion-col class="ion-padding"> You have no recipes yet </ion-col>
-  </ion-row>
+  <div *ngIf="loadedRecipes.length === 0" class="centered-content">
+    <ion-img src="../../assets/images/recipes-book.png" class="image"></ion-img>
+    <ion-text class="empty-text">You have no<br />
+      recipes yet</ion-text>
+  </div>
+
 
   <ion-list *ngFor="let recipe of loadedRecipes | filter: searchTerm, let i = index">
     <ion-item [routerLink]="['/', 'home', 'recipes', recipe.id]">

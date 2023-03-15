@@ -1,16 +1,33 @@
+ion-tab-bar {
+  border: 0;
+  contain: inherit;
+}
+
+ion-tab-button {
+  background-color: red;
+  max-width: inherit;
+}
+
+.add-container {
+  position: absolute;
+  z-index: 99999999999;
+  overflow: visible;
+  top: 0;
+  border: 8px solid white;
+  border-radius: 50%;
+  margin-top: -24px;
+}
 .add {
-  z-index: 999;
   width: 48px;
   height: 48px;
   background-color: orangered;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  text-decoration: none;
-  line-height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--orange-400);
+  background-image: linear-gradient(0, var(--orange-gradient));
+  box-shadow: 0 4px 16px -4px rgba(128, 16, 0, 0.6);
 }
 
 ion-tab-button {

@@ -1,5 +1,7 @@
 {
   "name": "handy-chef",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

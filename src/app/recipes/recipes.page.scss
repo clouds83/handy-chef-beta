@@ -1,9 +1,5 @@
-* {
-  position: relative;
-  z-index: 1;
-}
-
-.teste {
-  position: relative;
-  z-index: 999;
+.image {
+  width: 152px;
+  height: 152px;
+  filter: drop-shadow(4px 8px 16px rgba(145, 44, 0, 0.4));
 }

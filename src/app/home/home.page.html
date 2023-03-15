@@ -4,18 +4,14 @@
       <ion-tab-button tab="recipes">
         <ion-label>Recipes</ion-label>
       </ion-tab-button>
-      <a
-        *ngIf="activeTab === 'recipes'"
-        class="add"
-        [routerLink]="['/', 'home', 'recipes', 'add-item']"
-        >+</a
-      >
-      <a
-        *ngIf="activeTab === 'shopping-list'"
-        class="add"
-        (click)="addShoppingListItem()"
-        >+</a
-      >
+      <div class="add-container">
+        <a *ngIf="activeTab === 'recipes'" class="add" [routerLink]="['/', 'home', 'recipes', 'add-item']">
+          <img src="../../assets/images/plus-icon.svg" alt="Add recipe">
+        </a>
+        <a *ngIf="activeTab === 'shopping-list'" class="add" (click)="addShoppingListItem()">
+          <img src="../../assets/images/plus-icon.svg" alt="Add shopping item">
+        </a>
+      </div>
       <ion-tab-button tab="shopping-list">
         <ion-label>Shopping List</ion-label>
       </ion-tab-button>
