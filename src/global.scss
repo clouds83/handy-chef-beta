@@ -26,10 +26,12 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 :root {
-  --gray-900: #1a2810;
   --gray-500: #738566;
-  --orange-400: #ff692e;
-  --orange-gradient: #f5652c, #ff8657;
+  --gray-400: #a4b398;
+  --gray-900: #1a2810;
+  --primary-500: #66c61c;
+  --secondary-400: #ff692e;
+  --main-gradient: #f5652c, #ff8657;
 }
 
 @font-face {
@@ -56,9 +58,10 @@
   font-weight: 700;
 }
 
-* {
+body {
   font-family: Inter, sans-serif;
   font-weight: 400;
+  color: var(--gray-500);
 }
 
 .hide {

@@ -1,11 +1,42 @@
 ion-tab-bar {
   border: 0;
   contain: inherit;
+  height: 4.75rem;
 }
 
 ion-tab-button {
-  background-color: red;
   max-width: inherit;
+  background-color: white;
+  font-weight: 500;
+
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}
+
+.recipes-tab-button,
+.shoppinglist-tab-button {
+  box-shadow: 0px -0.5rem 4.5rem 0 rgba(59, 124, 15, 0.12);
+  color: var(--gray-400);
+
+  &.tab-selected {
+    color: var(--gray-900);
+    border-bottom: 0.25rem solid var(--primary-500);
+
+    ion-label {
+      path {
+        fill: var(--primary-500);
+      }
+    }
+  }
+}
+
+.recipes-tab-button {
+  border-top-left-radius: 1rem;
+}
+
+.shoppinglist-tab-button {
+  border-top-right-radius: 1rem;
 }
 
 .add-container {
@@ -13,23 +44,19 @@ ion-tab-button {
   z-index: 99999999999;
   overflow: visible;
   top: 0;
-  border: 8px solid white;
+  border: 0.5rem solid white;
   border-radius: 50%;
-  margin-top: -24px;
+  margin-top: -1.25rem;
 }
 .add {
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   background-color: orangered;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 1px solid var(--orange-400);
-  background-image: linear-gradient(0, var(--orange-gradient));
-  box-shadow: 0 4px 16px -4px rgba(128, 16, 0, 0.6);
-}
-
-ion-tab-button {
-  z-index: 1;
+  border: 1px solid var(--secondary-400);
+  background-image: linear-gradient(0, var(--main-gradient));
+  box-shadow: 0 0.25rem 1.25rem -0.25rem hsla(8, 100%, 33%, 0.6);
 }
