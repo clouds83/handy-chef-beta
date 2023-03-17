@@ -27,7 +27,7 @@ export class RecipesPage implements OnInit {
     this.loadedRecipes = this.recipeService._recipes;
   }
 
-  clearSearch() {
-    this.searchTerm = '';
+  onClick() {
+    console.log('clicado');
   }
 }

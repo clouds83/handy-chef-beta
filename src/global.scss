@@ -26,8 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 :root {
-  --gray-500: #738566;
+  --gray-200: #edf0ea;
   --gray-400: #a4b398;
+  --gray-500: #738566;
   --gray-900: #1a2810;
   --primary-500: #66c61c;
   --secondary-400: #ff692e;
@@ -58,8 +59,11 @@
   font-weight: 700;
 }
 
-body {
+* {
   font-family: Inter, sans-serif;
+}
+
+body {
   font-weight: 400;
   color: var(--gray-500);
 }
@@ -97,4 +101,24 @@ body {
 .empty-text {
   color: var(--gray-500);
   text-align: center;
+}
+
+ion-header {
+  background: rgb(255, 190, 190);
+}
+
+ion-toolbar {
+  --min-height: fit-content;
+}
+
+.side-menu {
+  margin: 0;
+
+  ion-button {
+    margin: 0;
+    height: 3rem;
+    --padding-end: 0;
+    --padding-start: 1.5rem;
+    --ripple-color: transparent;
+  }
 }

@@ -1,5 +1,89 @@
-.image {
-  width: 152px;
-  height: 152px;
-  filter: drop-shadow(4px 8px 16px rgba(145, 44, 0, 0.4));
+ion-header {
+  padding: 1.5rem 1.5rem 0;
+  border-bottom: 0.5rem solid white;
+}
+
+ion-toolbar {
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --border-width: 0;
+    --show-full-highlight: 0;
+    --highlight-background: black;
+  }
+
+  .search-input {
+    position: relative;
+    height: 3rem;
+    border-radius: 0.5rem;
+    --background: var(--gray-200);
+    --padding-start: 1rem;
+    --padding-end: 0.5rem;
+
+    ion-input {
+      font-family: Inter;
+      font-weight: 500;
+      --placeholder-color: var(--gray-500);
+      --placeholder-opacity: 1;
+    }
+
+    ion-icon {
+      position: absolute;
+      right: 0.5rem;
+    }
+  }
+}
+
+ion-content {
+  --padding-top: 0.5rem;
+  --padding-bottom: 1.5rem;
+  --padding-start: 1.5rem;
+  --padding-end: 1.5rem;
+
+  ion-item {
+    --padding-start: 0;
+    --inner-border-width: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 1rem;
+
+    ion-text {
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      gap: 0.25rem;
+    }
+
+    ion-thumbnail {
+      --border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      margin-inline-end: 0.75rem;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    ion-label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 0;
+    }
+
+    .list-recipe-name {
+      color: var(--gray-900);
+      font-weight: 500;
+    }
+
+    .list-recipe-time {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+  }
+
+  .image {
+    width: 9.5rem;
+    height: 9.5rem;
+    filter: drop-shadow(0.25rem 0.5rem 1rem rgba(145, 44, 0, 0.4));
+  }
 }
