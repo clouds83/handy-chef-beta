@@ -30,6 +30,7 @@
   --gray-400: #a4b398;
   --gray-500: #738566;
   --gray-900: #1a2810;
+  --primary-25: #fafef5;
   --primary-500: #66c61c;
   --secondary-400: #ff692e;
   --main-gradient: #f5652c, #ff8657;
@@ -96,6 +97,7 @@ body {
   font-size: 1.125rem;
   letter-spacing: -0.01em;
   color: var(--gray-900);
+  margin: 0;
 }
 
 .empty-text {
@@ -104,11 +106,33 @@ body {
 }
 
 ion-header {
-  background: rgb(255, 190, 190);
+  padding: 0.5rem 1.5rem 0.5rem;
+  //background: rgb(255, 190, 190);
+
+  ion-toolbar {
+    --min-height: fit-content;
+  }
 }
 
-ion-toolbar {
-  --min-height: fit-content;
+ion-footer,
+ion-header {
+  background-color: white;
+}
+
+ion-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 1.5rem;
+  --padding-end: 1.5rem;
+}
+
+ion-buttons {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+ion-button {
+  --ripple-color: transparent;
 }
 
 .side-menu {
@@ -119,6 +143,31 @@ ion-toolbar {
     height: 3rem;
     --padding-end: 0;
     --padding-start: 1.5rem;
-    --ripple-color: transparent;
   }
+}
+
+.back-button {
+  height: 3rem !important;
+  --padding-start: 0 !important;
+  --padding-end: 0.75rem !important;
+}
+
+.main-button {
+  --background: linear-gradient(0, var(--main-gradient));
+  --border-radius: 0.5rem;
+  --border-color: var(--secondary-400);
+  --border-width: 1px;
+  --border-style: solid;
+  --box-shadow: 0 0.25rem 1.25rem -0.25rem hsla(7, 80%, 18%, 0.08);
+  height: 3rem;
+  text-transform: initial;
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+ion-checkbox {
+  --border-radius: 50%;
+  --size: 1.5rem;
+  --border-color: var(--gray-400);
 }

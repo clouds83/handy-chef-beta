@@ -1,6 +1,5 @@
 ion-header {
-  padding: 1.5rem 1.5rem 0;
-  border-bottom: 0.5rem solid white;
+  padding: 1.5rem 1.5rem 1.5rem;
 }
 
 ion-toolbar {
@@ -35,10 +34,9 @@ ion-toolbar {
 }
 
 ion-content {
-  --padding-top: 0.5rem;
-  --padding-bottom: 1.5rem;
-  --padding-start: 1.5rem;
-  --padding-end: 1.5rem;
+  ion-list {
+    padding: 0;
+  }
 
   ion-item {
     --padding-start: 0;

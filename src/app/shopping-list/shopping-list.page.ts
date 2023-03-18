@@ -13,7 +13,6 @@ import { ShoppingListService } from '../shared/services/shopping-list.service';
 export class ShoppingListPage implements OnInit {
   subscription!: Subscription;
   editMode = false;
-  //shoppingList = this.shoppingListService.getShoppingList();
 
   constructor(
     public shoppingListService: ShoppingListService,

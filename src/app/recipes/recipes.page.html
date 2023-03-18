@@ -31,7 +31,7 @@
   </div>
 
 
-  <ion-list>
+  <ion-list *ngIf="loadedRecipes.length > 0">
     <ng-container *ngFor="let recipe of loadedRecipes | filter: searchTerm, let i = index">
       <ion-item [routerLink]="['/', 'home', 'recipes', recipe.id]" class="ion-no-border">
         <ion-thumbnail slot="start">

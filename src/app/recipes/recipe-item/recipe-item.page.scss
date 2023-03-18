@@ -1,0 +1,99 @@
+ion-header {
+  ion-button {
+    --padding-start: 0.75rem;
+    --padding-end: 0;
+    height: 3rem;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+}
+
+.recipe-img {
+  position: relative;
+
+  ion-img {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  ion-text {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background-color: var(--primary-25);
+    border-radius: 1rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.375rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: var(--gray-900);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+ion-segment {
+  --background: var(--gray-200);
+  border-radius: 2rem;
+  border: 0.25rem solid var(--gray-200);
+}
+
+ion-segment-button.md {
+  --indicator-height: 2rem;
+  --indicator-color: white;
+  --ripple-color: transparent;
+  --padding-end: 0;
+  --padding-start: 0;
+  --color: var(--gray-500);
+  --color-checked: var(--gray-900);
+  min-height: 2.25rem;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  margin-top: -0.25rem;
+}
+
+ion-list {
+  padding: 0;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-border-width: 0;
+  --inner-padding-end: 0;
+  --min-height: 3rem;
+  border-top: 1px solid var(--gray-200);
+  color: var(--gray-900);
+  font-size: 0.875rem;
+
+  ion-label {
+    font-weight: 400;
+  }
+
+  span {
+    font-weight: 500;
+    color: var(--gray-500);
+  }
+
+  ion-checkbox {
+    margin: auto;
+  }
+}
+
+ion-footer {
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.servings {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--gray-900);
+  font-weight: 500;
+  justify-content: center;
+}
+
+.page-title,
+.recipe-img,
+ion-segment {
+  margin-bottom: 1rem;
+}
