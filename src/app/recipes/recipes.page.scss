@@ -18,6 +18,7 @@ ion-toolbar {
     --background: var(--gray-200);
     --padding-start: 1rem;
     --padding-end: 0.5rem;
+    overflow: hidden;
 
     ion-input {
       font-family: Inter;

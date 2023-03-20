@@ -21,7 +21,100 @@ import { v4 as uuidv4 } from 'uuid';
 export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
+  // ingredientList: Ingredient[] = [
+  //   {
+  //     amount: 111,
+  //     unit: 'g',
+  //     ingredient: 'Cocaine',
+  //   },
+  //   {
+  //     amount: 222,
+  //     unit: 'Kg',
+  //     ingredient: 'Meat',
+  //   },
+  //   {
+  //     amount: 333,
+  //     unit: '',
+  //     ingredient: 'Tomatoes',
+  //   },
+  //   {
+  //     amount: 111,
+  //     unit: 'g',
+  //     ingredient: 'Cocaine',
+  //   },
+  //   {
+  //     amount: 222,
+  //     unit: 'Kg',
+  //     ingredient: 'Meat',
+  //   },
+  //   {
+  //     amount: 333,
+  //     unit: '',
+  //     ingredient: 'Tomatoes',
+  //   },
+  //   {
+  //     amount: 111,
+  //     unit: 'g',
+  //     ingredient: 'Cocaine',
+  //   },
+  //   {
+  //     amount: 222,
+  //     unit: 'Kg',
+  //     ingredient: 'Meat',
+  //   },
+  //   {
+  //     amount: 333,
+  //     unit: '',
+  //     ingredient: 'Tomatoes',
+  //   },
+  //   {
+  //     amount: 111,
+  //     unit: 'g',
+  //     ingredient: 'Cocaine',
+  //   },
+  //   {
+  //     amount: 222,
+  //     unit: 'Kg',
+  //     ingredient: 'Meat',
+  //   },
+  //   {
+  //     amount: 333,
+  //     unit: '',
+  //     ingredient: 'Tomatoes',
+  //   },
+  //   {
+  //     amount: 111,
+  //     unit: 'g',
+  //     ingredient: 'Cocaine',
+  //   },
+  //   {
+  //     amount: 222,
+  //     unit: 'Kg',
+  //     ingredient: 'Meat',
+  //   },
+  //   {
+  //     amount: 333,
+  //     unit: '',
+  //     ingredient: 'Tomatoes',
+  //   },
+  //   {
+  //     amount: 111,
+  //     unit: 'g',
+  //     ingredient: 'Cocaine',
+  //   },
+  //   {
+  //     amount: 222,
+  //     unit: 'Kg',
+  //     ingredient: 'Meat',
+  //   },
+  //   {
+  //     amount: 333,
+  //     unit: '',
+  //     ingredient: 'Tomatoes',
+  //   },
+  // ];
   ingredientList: Ingredient[] = [];
+
   recipeId = uuidv4();
 
   isUpdating = false;
@@ -61,11 +154,11 @@ export class AddRecipePage implements OnInit {
   initializeForm() {
     this.form = new FormGroup({
       id: new FormControl(this.recipeId),
-      name: new FormControl('Feijoadombers', {
+      name: new FormControl('asndioadsn', {
         updateOn: 'change',
         validators: [
           Validators.required,
-          Validators.maxLength(56),
+          Validators.maxLength(64),
           Validators.minLength(3),
         ],
       }),

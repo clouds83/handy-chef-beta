@@ -46,10 +46,9 @@ ion-segment-button.md {
   --padding-start: 0;
   --color: var(--gray-500);
   --color-checked: var(--gray-900);
-  min-height: 2.25rem;
+  min-height: 2rem;
   text-transform: capitalize;
   letter-spacing: 0;
-  margin-top: -0.25rem;
 }
 
 ion-list {
@@ -79,10 +78,6 @@ ion-item {
   }
 }
 
-ion-footer {
-  padding: 0.5rem 1.5rem 1.5rem;
-}
-
 .servings {
   display: flex;
   align-items: center;
@@ -90,9 +85,10 @@ ion-footer {
   color: var(--gray-900);
   font-weight: 500;
   justify-content: center;
+  margin: 0 0 1rem;
 }
 
-.page-title,
+.recipe-name,
 .recipe-img,
 ion-segment {
   margin-bottom: 1rem;

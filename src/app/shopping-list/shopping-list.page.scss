@@ -1,11 +1,5 @@
 ion-header {
   .page-title {
-    padding: 0;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    line-height: 3rem;
-
     ion-button {
       margin: 0;
       position: absolute;
@@ -20,6 +14,7 @@ ion-content {
 
   ion-list {
     padding: 0;
+    border-bottom: 1px solid var(--gray-200);
   }
 
   ion-item {
