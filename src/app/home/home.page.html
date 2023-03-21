@@ -20,7 +20,7 @@
         <a *ngIf="activeTab === 'recipes'" class="add" [routerLink]="['/', 'home', 'recipes', 'add-item']">
           <img src="../../assets/images/plus-icon.svg" alt="Add recipe">
         </a>
-        <a *ngIf="activeTab === 'shopping-list'" class="add" (click)="addShoppingListItem()">
+        <a *ngIf="activeTab === 'shopping-list'" class="add" (click)="addShoppingListItem(true)">
           <img src="../../assets/images/plus-icon.svg" alt="Add shopping item">
         </a>
       </div>

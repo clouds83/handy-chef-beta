@@ -51,11 +51,12 @@ export class ShoppingListPage implements OnInit {
     await alert.present();
   }
 
-  async onEditItem(index: number, editingIngredient: any) {
+  async onEditItem(index: number, editingIngredient: any, isShoppingList: any) {
     const modal = await this.modalCtrl.create({
       component: AddIngredientPage,
       componentProps: {
         editingIngredient: editingIngredient,
+        isShoppingList: isShoppingList,
       },
     });
 

@@ -9,20 +9,20 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./add-ingredient.page.scss'],
 })
 export class AddIngredientPage implements OnInit {
-  addWhere!: string;
+  //addWhere!: string;
   form!: FormGroup;
   @Input() editingIngredient: any;
+  @Input() isShoppingList: any;
 
   constructor(private router: Router, private modalCtrl: ModalController) {
-    this.router.events.subscribe(() => {
-      if (this.router.url.includes('recipes')) {
-        this.addWhere = 'recipes';
-      }
-
-      if (this.router.url.includes('shopping-list')) {
-        this.addWhere = 'shopping-list';
-      }
-    });
+    // this.router.events.subscribe(() => {
+    //   if (this.router.url.includes('recipes')) {
+    //     this.addWhere = 'recipes';
+    //   }
+    //   if (this.router.url.includes('shopping-list')) {
+    //     this.addWhere = 'shopping-list';
+    //   }
+    // });
   }
 
   async ngOnInit() {

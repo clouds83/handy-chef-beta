@@ -79,6 +79,10 @@ body {
   display: none;
 }
 
+.fade {
+  opacity: 0;
+}
+
 .buttons {
   position: fixed;
   bottom: 0;
@@ -185,6 +189,14 @@ ion-button {
 
 .mr-12 {
   margin-right: 0.75rem;
+}
+
+.pb-24 {
+  padding-bottom: 1.5rem;
+}
+
+.fs-14 {
+  font-size: 0.875rem;
 }
 
 .back-button {

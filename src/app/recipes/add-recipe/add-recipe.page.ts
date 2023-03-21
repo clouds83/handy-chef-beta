@@ -21,98 +21,6 @@ import { v4 as uuidv4 } from 'uuid';
 export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
-  // ingredientList: Ingredient[] = [
-  //   {
-  //     amount: 111,
-  //     unit: 'g',
-  //     ingredient: 'Cocaine',
-  //   },
-  //   {
-  //     amount: 222,
-  //     unit: 'Kg',
-  //     ingredient: 'Meat',
-  //   },
-  //   {
-  //     amount: 333,
-  //     unit: '',
-  //     ingredient: 'Tomatoes',
-  //   },
-  //   {
-  //     amount: 111,
-  //     unit: 'g',
-  //     ingredient: 'Cocaine',
-  //   },
-  //   {
-  //     amount: 222,
-  //     unit: 'Kg',
-  //     ingredient: 'Meat',
-  //   },
-  //   {
-  //     amount: 333,
-  //     unit: '',
-  //     ingredient: 'Tomatoes',
-  //   },
-  //   {
-  //     amount: 111,
-  //     unit: 'g',
-  //     ingredient: 'Cocaine',
-  //   },
-  //   {
-  //     amount: 222,
-  //     unit: 'Kg',
-  //     ingredient: 'Meat',
-  //   },
-  //   {
-  //     amount: 333,
-  //     unit: '',
-  //     ingredient: 'Tomatoes',
-  //   },
-  //   {
-  //     amount: 111,
-  //     unit: 'g',
-  //     ingredient: 'Cocaine',
-  //   },
-  //   {
-  //     amount: 222,
-  //     unit: 'Kg',
-  //     ingredient: 'Meat',
-  //   },
-  //   {
-  //     amount: 333,
-  //     unit: '',
-  //     ingredient: 'Tomatoes',
-  //   },
-  //   {
-  //     amount: 111,
-  //     unit: 'g',
-  //     ingredient: 'Cocaine',
-  //   },
-  //   {
-  //     amount: 222,
-  //     unit: 'Kg',
-  //     ingredient: 'Meat',
-  //   },
-  //   {
-  //     amount: 333,
-  //     unit: '',
-  //     ingredient: 'Tomatoes',
-  //   },
-  //   {
-  //     amount: 111,
-  //     unit: 'g',
-  //     ingredient: 'Cocaine',
-  //   },
-  //   {
-  //     amount: 222,
-  //     unit: 'Kg',
-  //     ingredient: 'Meat',
-  //   },
-  //   {
-  //     amount: 333,
-  //     unit: '',
-  //     ingredient: 'Tomatoes',
-  //   },
-  // ];
   ingredientList: Ingredient[] = [];
 
   recipeId = uuidv4();
@@ -194,6 +102,15 @@ export class AddRecipePage implements OnInit {
 
   previousStep() {
     this.step = --this.step;
+  }
+
+  isImageLoaded!: boolean;
+  onImageLoad() {
+    this.isImageLoaded = true;
+  }
+
+  onImageError() {
+    this.isImageLoaded = false;
   }
 
   async onAddIngredient() {

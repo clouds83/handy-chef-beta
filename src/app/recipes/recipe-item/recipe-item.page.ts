@@ -54,6 +54,14 @@ export class RecipeItemPage implements OnInit {
     this.selectedIngredients = this.recipe.ingredients.filter(
       (ingredient: any) => ingredient.selected
     );
+
+    if (this.selectedIngredients.length == 0) {
+      this.shoppingListService._shoppingList.push(...this.recipe.ingredients);
+      this.storage.set('shoppingList', this.shoppingListService._shoppingList);
+
+      this.toastService.greenToast('Items sent successfully');
+    }
+
     if (this.selectedIngredients.length > 0) {
       this.shoppingListService._shoppingList.push(...this.selectedIngredients);
       this.storage.set('shoppingList', this.shoppingListService._shoppingList);
@@ -63,6 +71,14 @@ export class RecipeItemPage implements OnInit {
       });
 
       this.toastService.greenToast('Items sent successfully');
+    }
+  }
+
+  onSelectIngredient() {
+    if (this.selectedIngredients.length > 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 

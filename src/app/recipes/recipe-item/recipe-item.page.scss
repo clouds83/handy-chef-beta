@@ -53,6 +53,8 @@ ion-segment-button.md {
 
 ion-list {
   padding: 0;
+  border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 0.5rem;
 }
 
 ion-item {
@@ -66,6 +68,7 @@ ion-item {
 
   ion-label {
     font-weight: 400;
+    white-space: break-spaces;
   }
 
   span {

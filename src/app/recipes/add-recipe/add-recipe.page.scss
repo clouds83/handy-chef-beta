@@ -11,7 +11,11 @@ ion-header {
 }
 
 ion-content {
-  //--padding-bottom: 1rem;
+  ion-img {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
   .ingredients-step {
     display: flex;
     flex-direction: column;
