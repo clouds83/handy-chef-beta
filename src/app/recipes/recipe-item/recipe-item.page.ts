@@ -46,8 +46,16 @@ export class RecipeItemPage implements OnInit {
     this.navCtrl.navigateBack('/');
   }
 
-  onEditRecipe() {
-    this.router.navigate(['edit-recipe'], { relativeTo: this.route });
+  isIngredientSelected() {
+    if (
+      this.recipe.ingredients.filter(
+        (ingredient: any) => ingredient.selected
+      ) == 0
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   onSendToShoppingList() {
@@ -58,8 +66,6 @@ export class RecipeItemPage implements OnInit {
     if (this.selectedIngredients.length == 0) {
       this.shoppingListService._shoppingList.push(...this.recipe.ingredients);
       this.storage.set('shoppingList', this.shoppingListService._shoppingList);
-
-      this.toastService.greenToast('Items sent successfully');
     }
 
     if (this.selectedIngredients.length > 0) {
@@ -69,34 +75,33 @@ export class RecipeItemPage implements OnInit {
       this.recipe.ingredients.forEach((ingredient: any) => {
         ingredient.selected = false;
       });
-
-      this.toastService.greenToast('Items sent successfully');
     }
+    
+    this.toastService.greenToast('Ingredients sent, happy shopping! 😊');
   }
 
-  onSelectIngredient() {
-    if (this.selectedIngredients.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
+  onEditRecipe() {
+    this.router.navigate(['edit-recipe'], { relativeTo: this.route });
   }
 
   async onDeleteRecipe() {
     const alert = await this.alertCtrl.create({
       header: 'Confirm Deletion',
+      cssClass: 'custom-alert',
       message: `Are you sure you want to delete ${this.recipe.name}?`,
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'alert-button-cancel',
         },
         {
           text: 'Delete',
+          cssClass: 'alert-button-delete',
           handler: () => {
             this.recipeService.deleteRecipe(this.id);
             this.router.navigateByUrl('/');
+            this.toastService.redToast('Farewell, recipe. 😔');
           },
         },
       ],

@@ -8,6 +8,7 @@ ion-tab-button {
   max-width: inherit;
   background-color: white;
   font-weight: 500;
+  font-size: 14px;
 
   ion-icon {
     font-size: 1.5rem;
@@ -49,8 +50,10 @@ ion-tab-button {
   margin-top: -1.25rem;
 }
 .add {
-  width: 3rem;
-  height: 3rem;
+  width: 16vw;
+  height: 16vw;
+  max-width: 4rem;
+  max-height: 4rem;
   background-color: orangered;
   display: flex;
   justify-content: center;
@@ -59,4 +62,9 @@ ion-tab-button {
   border: 1px solid var(--secondary-400);
   background-image: linear-gradient(0, var(--main-gradient));
   box-shadow: 0 0.25rem 1.25rem -0.25rem hsla(8, 100%, 33%, 0.6);
+
+  img {
+    width: 5vw;
+    max-width: 1rem;
+  }
 }

@@ -8,13 +8,12 @@ ion-header {
   }
 }
 
-.recipe-img {
-  position: relative;
+ion-content {
+  --padding-bottom: 0;
+}
 
-  ion-img {
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
+.image-container {
+  position: relative;
 
   ion-text {
     position: absolute;
@@ -79,6 +78,10 @@ ion-item {
   ion-checkbox {
     margin: auto;
   }
+}
+
+ion-footer {
+  padding-bottom: 1.5rem;
 }
 
 .servings {

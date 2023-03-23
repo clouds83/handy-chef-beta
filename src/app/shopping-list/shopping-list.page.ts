@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Subscription } from 'rxjs';
 import { AddIngredientPage } from '../shared/add-ingredient/add-ingredient.page';
 import { ShoppingListService } from '../shared/services/shopping-list.service';
+import { ToasterService } from '../shared/services/toast.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -18,7 +19,8 @@ export class ShoppingListPage implements OnInit {
     public shoppingListService: ShoppingListService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private storage: Storage
+    private storage: Storage,
+    private toastService: ToasterService
   ) {}
 
   ngOnInit() {
@@ -28,22 +30,26 @@ export class ShoppingListPage implements OnInit {
   onDeleteShoppingItem(index: number) {
     this.shoppingListService._shoppingList.splice(index, 1);
     this.storage.set('shoppingList', this.shoppingListService._shoppingList);
+    this.toastService.redToast('Item crossed off. 👋');
   }
 
   async onClearList() {
     const alert = await this.alertCtrl.create({
-      header: 'Confirm Deletion',
-      message: `Are you sure you want to delete all items?`,
+      header: 'Clear List?',
+      cssClass: 'custom-alert',
+      message: 'This action cannot be undone.',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'alert-button-cancel',
         },
         {
-          text: 'Delete',
+          text: 'Clear Items',
+          cssClass: 'alert-button-delete',
           handler: () => {
             this.shoppingListService.clearShoppingList();
+            this.toastService.redToast('Shopping list cleared. 😔');
           },
         },
       ],

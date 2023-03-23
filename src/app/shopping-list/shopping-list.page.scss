@@ -10,7 +10,7 @@ ion-header {
 }
 
 ion-content {
-  --padding-bottom: 1rem;
+  //--padding-bottom: 1rem;
 
   ion-list {
     padding: 0;
@@ -50,5 +50,8 @@ ion-content {
 }
 
 .centered-content {
-  gap: 0.75rem;
+  padding-top: 2rem;
+  gap: 1rem;
 }
+
+

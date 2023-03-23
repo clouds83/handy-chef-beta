@@ -7,7 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  NavController,
+  NavParams,
+} from '@ionic/angular';
 import { AddIngredientPage } from 'src/app/shared/add-ingredient/add-ingredient.page';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
@@ -34,7 +39,8 @@ export class AddRecipePage implements OnInit {
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -67,7 +73,6 @@ export class AddRecipePage implements OnInit {
         validators: [
           Validators.required,
           Validators.maxLength(64),
-          Validators.minLength(3),
         ],
       }),
       servings: new FormControl(64, {
@@ -168,14 +173,14 @@ export class AddRecipePage implements OnInit {
     if (this.isUpdating) {
       this.recipeService.updateRecipe(this.updatingRecipe.id, this.form.value);
       this.router.navigate(['/home/recipes', this.updatingRecipe.id], {
-        queryParams: { message: 'Recipe updated sucessfully' },
+        queryParams: { message: 'Recipe updated! ☝️' },
       });
     }
 
     if (!this.isUpdating) {
       this.recipeService.addRecipe(this.form.value);
       this.router.navigate(['/home/recipes', this.form.value.id], {
-        queryParams: { message: 'Recipe saved sucessfully' },
+        queryParams: { message: 'Recipe saved! 👏' },
       });
     }
 
@@ -184,7 +189,26 @@ export class AddRecipePage implements OnInit {
     this.step = 1;
   }
 
-  onCancel() {
-    this.navCtrl.back();
+  async onCancel() {
+    const alert = await this.alertCtrl.create({
+      header: 'Close window',
+      cssClass: 'custom-alert',
+      message: 'Unsaved changes will be lost.',
+      buttons: [
+        {
+          text: 'Keep Editing',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'Confirm',
+          cssClass: 'alert-button-delete',
+          handler: () => {
+            this.navCtrl.back();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 }

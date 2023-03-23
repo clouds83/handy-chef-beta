@@ -2,9 +2,14 @@
   <ion-toolbar>
 
     <ion-item class="search-input">
-      <ion-input type="search" [(ngModel)]="searchTerm" placeholder="Search your recipes" [clearInput]="true">
+
+      <ion-input type="search" [(ngModel)]="searchTerm"
+      [placeholder]="loadedRecipes.length > 0 ? 'Find your meal 🤤' : 'No recipes 😣'"
+      [disabled]="loadedRecipes.length === 0"
+      [clearInput]="true">
+
       </ion-input>
-      <ion-icon name="search" slot="end" size="small" color="primary" *ngIf="!searchTerm"></ion-icon>
+      <ion-icon name="search" slot="end" size="small" color="primary" *ngIf="!searchTerm && loadedRecipes.length > 0"></ion-icon>
     </ion-item>
 
     <ion-buttons slot="end" class="side-menu">
@@ -26,20 +31,24 @@
 
   <div *ngIf="loadedRecipes.length === 0" class="centered-content">
     <ion-img src="../../assets/images/recipes-book.png" class="image"></ion-img>
-    <ion-text class="empty-text">You have no<br />
-      recipes yet</ion-text>
+    <ion-text class="empty-text">No recipes yet?<br/>Let's get cooking! 🍴</ion-text>
   </div>
+
+  <ng-container *ngIf="(loadedRecipes | filter: searchTerm).length === 0 && loadedRecipes.length > 0">
+    <p>No recipes found.</p>
+  </ng-container>
 
 
   <ion-list *ngIf="loadedRecipes.length > 0">
     <ng-container *ngFor="let recipe of loadedRecipes | filter: searchTerm, let i = index">
       <ion-item [routerLink]="['/', 'home', 'recipes', recipe.id]" class="ion-no-border">
         <ion-thumbnail slot="start">
-          <ion-img [src]="recipe.image"></ion-img>
+          <ion-img [src]="recipe.image" *ngIf="recipe.image"></ion-img>
+          <ion-img src="../../assets/images/recipe-img-placeholder.png" *ngIf="!recipe.image"></ion-img>
         </ion-thumbnail>
         <ion-label>
           <ion-text class="list-recipe-name">{{recipe.name}}</ion-text>
-          <ion-text class="list-recipe-time">
+          <ion-text class="list-recipe-time" *ngIf="recipe.time">
 
 
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
