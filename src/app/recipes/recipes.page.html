@@ -1,65 +1,95 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-
     <ion-item class="search-input">
-
-      <ion-input type="search" [(ngModel)]="searchTerm"
-      [placeholder]="loadedRecipes.length > 0 ? 'Find your meal 🤤' : 'No recipes 😣'"
-      [disabled]="loadedRecipes.length === 0"
-      [clearInput]="true">
-
+      <ion-input
+        type="search"
+        [(ngModel)]="searchTerm"
+        [placeholder]="loadedRecipes.length > 0 ? 'Find your meal 🤤' : 'No recipes 😣'"
+        [disabled]="loadedRecipes.length === 0"
+        [clearInput]="true"
+      >
       </ion-input>
-      <ion-icon name="search" slot="end" size="small" color="primary" *ngIf="!searchTerm && loadedRecipes.length > 0"></ion-icon>
+      <ion-icon
+        name="search"
+        slot="end"
+        size="small"
+        color="primary"
+        *ngIf="!searchTerm && loadedRecipes.length > 0"
+      ></ion-icon>
     </ion-item>
 
-    <ion-buttons slot="end" class="side-menu">
+    <ion-buttons slot="end" class="side-menu hide">
       <ion-button (click)="onClick()">
-
-        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
+        <svg
+          width="20"
+          height="14"
+          viewBox="0 0 20 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
             d="M0 1C0 0.447715 0.447715 0 1 0H19C19.5523 0 20 0.447715 20 1C20 1.55228 19.5523 2 19 2H1C0.447715 2 0 1.55228 0 1ZM0 7C0 6.44772 0.447715 6 1 6H19C19.5523 6 20 6.44772 20 7C20 7.55228 19.5523 8 19 8H1C0.447715 8 0 7.55228 0 7ZM0 13C0 12.4477 0.447715 12 1 12H19C19.5523 12 20 12.4477 20 13C20 13.5523 19.5523 14 19 14H1C0.447715 14 0 13.5523 0 13Z"
-            fill="#A4B398" />
+            fill="#A4B398"
+          />
         </svg>
-
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <div *ngIf="loadedRecipes.length === 0" class="centered-content">
     <ion-img src="../../assets/images/recipes-book.png" class="image"></ion-img>
-    <ion-text class="empty-text">No recipes yet?<br/>Let's get cooking! 🍴</ion-text>
+    <ion-text class="empty-text"
+      >No recipes yet?<br />Let's get cooking! 🍴</ion-text
+    >
   </div>
 
-  <ng-container *ngIf="(loadedRecipes | filter: searchTerm).length === 0 && loadedRecipes.length > 0">
+  <ng-container
+    *ngIf="(loadedRecipes | filter: searchTerm).length === 0 && loadedRecipes.length > 0"
+  >
     <p>No recipes found.</p>
   </ng-container>
 
-
   <ion-list *ngIf="loadedRecipes.length > 0">
-    <ng-container *ngFor="let recipe of loadedRecipes | filter: searchTerm, let i = index">
-      <ion-item [routerLink]="['/', 'home', 'recipes', recipe.id]" class="ion-no-border">
+    <ng-container
+      *ngFor="let recipe of loadedRecipes | filter: searchTerm, let i = index"
+    >
+      <ion-item
+        [routerLink]="['/', 'home', 'recipes', recipe.id]"
+        class="ion-no-border"
+      >
         <ion-thumbnail slot="start">
-          <ion-img [src]="recipe.image" *ngIf="recipe.image"></ion-img>
-          <ion-img src="../../assets/images/recipe-img-placeholder.png" *ngIf="!recipe.image"></ion-img>
+          <ion-img
+            src="../../../assets/images/{{recipe.image}}.jpg"
+            *ngIf="recipe.image"
+          ></ion-img>
+          <ion-img
+            src="../../assets/images/recipe-img-placeholder.png"
+            *ngIf="!recipe.image"
+          ></ion-img>
         </ion-thumbnail>
         <ion-label>
           <ion-text class="list-recipe-name">{{recipe.name}}</ion-text>
           <ion-text class="list-recipe-time" *ngIf="recipe.time">
-
-
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M6 0C4.81331 0 3.65328 0.351894 2.66658 1.01118C1.67989 1.67047 0.910851 2.60754 0.456725 3.7039C0.00259972 4.80026 -0.11622 6.00665 0.115291 7.17054C0.346802 8.33443 0.918247 9.40352 1.75736 10.2426C2.59648 11.0818 3.66557 11.6532 4.82946 11.8847C5.99335 12.1162 7.19975 11.9974 8.2961 11.5433C9.39246 11.0891 10.3295 10.3201 10.9888 9.33342C11.6481 8.34673 12 7.18669 12 6C11.9982 4.40926 11.3655 2.88419 10.2406 1.75937C9.11581 0.634545 7.59074 0.0018196 6 0ZM6 10.5C5.10999 10.5 4.23996 10.2361 3.49994 9.74161C2.75991 9.24715 2.18314 8.54434 1.84254 7.72207C1.50195 6.89981 1.41284 5.99501 1.58647 5.12209C1.7601 4.24918 2.18869 3.44736 2.81802 2.81802C3.44736 2.18868 4.24918 1.7601 5.1221 1.58647C5.99501 1.41283 6.89981 1.50195 7.72208 1.84254C8.54434 2.18314 9.24715 2.75991 9.74161 3.49993C10.2361 4.23995 10.5 5.10998 10.5 6C10.4987 7.19307 10.0242 8.33691 9.18055 9.18054C8.33691 10.0242 7.19308 10.4987 6 10.5Z"
-                fill="#738566" />
+                fill="#738566"
+              />
               <path
                 d="M8.25 5.25H6.75V3.75C6.75 3.55109 6.67098 3.36032 6.53033 3.21967C6.38968 3.07902 6.19891 3 6 3C5.80109 3 5.61032 3.07902 5.46967 3.21967C5.32902 3.36032 5.25 3.55109 5.25 3.75V6C5.24995 6.09851 5.26931 6.19606 5.30698 6.28708C5.34465 6.3781 5.39989 6.4608 5.46955 6.53045C5.5392 6.60011 5.6219 6.65535 5.71292 6.69302C5.80394 6.73069 5.90149 6.75005 6 6.75H8.25C8.44891 6.75 8.63968 6.67098 8.78033 6.53033C8.92098 6.38968 9 6.19891 9 6C9 5.80109 8.92098 5.61032 8.78033 5.46967C8.63968 5.32902 8.44891 5.25 8.25 5.25Z"
-                fill="#738566" />
+                fill="#738566"
+              />
             </svg>
-
 
             {{recipe.time}} minutes
           </ion-text>
@@ -67,5 +97,4 @@
       </ion-item>
     </ng-container>
   </ion-list>
-
 </ion-content>

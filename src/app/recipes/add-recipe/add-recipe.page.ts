@@ -70,10 +70,7 @@ export class AddRecipePage implements OnInit {
       id: new FormControl(this.recipeId),
       name: new FormControl('asndioadsn', {
         updateOn: 'change',
-        validators: [
-          Validators.required,
-          Validators.maxLength(64),
-        ],
+        validators: [Validators.required, Validators.maxLength(64)],
       }),
       servings: new FormControl(64, {
         updateOn: 'change',
@@ -87,12 +84,9 @@ export class AddRecipePage implements OnInit {
           updateOn: 'change',
         }
       ),
-      image: new FormControl(
-        'https://img.cybercook.com.br/receitas/776/feijoada.jpeg',
-        {
-          updateOn: 'change',
-        }
-      ),
+      image: new FormControl(null, {
+        updateOn: 'change',
+      }),
       ingredients: this.fb.array([]),
     });
   }
@@ -109,14 +103,14 @@ export class AddRecipePage implements OnInit {
     this.step = --this.step;
   }
 
-  isImageLoaded!: boolean;
-  onImageLoad() {
-    this.isImageLoaded = true;
-  }
+  // isImageLoaded!: boolean;
+  // onImageLoad() {
+  //   this.isImageLoaded = true;
+  // }
 
-  onImageError() {
-    this.isImageLoaded = false;
-  }
+  // onImageError() {
+  //   this.isImageLoaded = false;
+  // }
 
   async onAddIngredient() {
     const modal = await this.modalCtrl.create({
@@ -167,7 +161,7 @@ export class AddRecipePage implements OnInit {
     });
   }
 
-  onSaveRecipe() {
+  async onSaveRecipe() {
     this.pushIngredientsToFormArray(this.ingredientList);
 
     if (this.isUpdating) {

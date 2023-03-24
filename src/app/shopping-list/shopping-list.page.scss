@@ -10,11 +10,10 @@ ion-header {
 }
 
 ion-content {
-  //--padding-bottom: 1rem;
 
   ion-list {
     padding: 0;
-    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 1.5rem;
   }
 
   ion-item {

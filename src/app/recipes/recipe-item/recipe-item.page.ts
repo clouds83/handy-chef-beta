@@ -76,7 +76,7 @@ export class RecipeItemPage implements OnInit {
         ingredient.selected = false;
       });
     }
-    
+
     this.toastService.greenToast('Ingredients sent, happy shopping! 😊');
   }
 
@@ -88,7 +88,7 @@ export class RecipeItemPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: 'Confirm Deletion',
       cssClass: 'custom-alert',
-      message: `Are you sure you want to delete ${this.recipe.name}?`,
+      message: `Are you sure you want to delete <span>${this.recipe.name}</span>?`,
       buttons: [
         {
           text: 'Cancel',

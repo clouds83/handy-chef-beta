@@ -14,7 +14,9 @@ import { AddRecipePage } from './add-recipe.page';
     ReactiveFormsModule,
     IonicModule,
     AddRecipePageRoutingModule,
+        
   ],
   declarations: [AddRecipePage],
+
 })
 export class AddRecipePageModule {}

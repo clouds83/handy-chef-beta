@@ -124,19 +124,21 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this._recipes.push(recipe);
+    this._recipes.sort((a, b) => a.name.localeCompare(b.name));
     this.storage.set('recipes', this._recipes);
-    //this.loadRecipes();
     this.recipesChanged.next(this._recipes);
   }
 
   updateRecipe(id: any, newRecipe: Recipe) {
     this._recipes[this.getIndex(id)] = newRecipe;
+    this._recipes.sort((a, b) => a.name.localeCompare(b.name));
     this.storage.set('recipes', this._recipes);
     this.recipesChanged.next(this._recipes);
   }
 
   deleteRecipe(id: any) {
     this._recipes.splice(this.getIndex(id), 1);
+    this._recipes.sort((a, b) => a.name.localeCompare(b.name));
     this.storage.set('recipes', this._recipes);
     this.recipesChanged.next(this._recipes);
   }

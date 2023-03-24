@@ -33,7 +33,6 @@ export class HomePage implements OnInit {
   ngOnInit() {}
 
   async addShoppingListItem(isShoppingList: any) {
-    console.log('isShoppingList = ', isShoppingList);
     const modal = await this.modalCtrl.create({
       component: AddIngredientPage,
       componentProps: {

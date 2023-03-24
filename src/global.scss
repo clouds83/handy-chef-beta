@@ -28,13 +28,14 @@
 :root {
   --gray-200: #edf0ea;
   --gray-300: #d5ddd0;
-  --gray-400: #a4b398;
-  --gray-500: #738566;
-  --gray-600: #556747;
-  --gray-900: #1a2810;
+  --gray-400: #a1ab9a;
+  --gray-500: #677060;
+  --gray-600: #485241;
+  --gray-900: #181f12;
   --primary-25: #fafef5;
   --primary-500: #66c61c;
-  --secondary-200: #FFD6AE;
+  --primary-600: #4ca30d;
+  --secondary-200: #ffd6ae;
   --secondary-400: #ff692e;
   --main-gradient: #f5652c, #ff8657;
 }
@@ -82,10 +83,6 @@ p {
 
 .hide {
   display: none;
-}
-
-.fade {
-  opacity: 0;
 }
 
 .buttons {
@@ -295,36 +292,34 @@ ion-item {
 
     &.has-focus.sc-ion-input-ios-h,
     &.has-focus.sc-ion-textarea-ios-h {
-    
       border-color: var(--secondary-200);
-    
     }
 
     &.ion-valid.has-value {
-      border-color: var(--primary-500)
+      border-color: var(--primary-500);
     }
 
-    &.has-value.ion-invalid, &.ion-touched.ion-invalid {
+    &.has-value.ion-invalid,
+    &.ion-touched.ion-invalid {
       border-color: var(--ion-color-danger);
     }
-    
   }
-
-  
-
-
 }
 
 .custom-alert {
-  
   .alert-wrapper {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 1.5rem;
 
-    .alert-head, .alert-message {
+    &.sc-ion-alert-md {
+      border-radius: 0.5rem;
+    }
+
+    .alert-head,
+    .alert-message {
       padding: 0 0 1rem;
       text-align: center;
     }
-    
+
     .alert-button-group {
       justify-content: center;
       padding: 0;
@@ -342,15 +337,20 @@ ion-item {
 
   .alert-message {
     color: var(--gray-500);
+    span {
+      color: var(--gray-900);
+      font-weight: 500;
+    }
   }
 
-  
-  .alert-button-cancel, .alert-button-confirm, .alert-button-delete {
+  .alert-button-cancel,
+  .alert-button-confirm,
+  .alert-button-delete {
     background-color: white;
     border: 1px solid var(--primary-500);
     color: var(--primary-500);
-    border-radius: 0.5rem;
-    
+    border-radius: 0.375rem;
+
     height: 2.5rem;
     padding: 0 1rem;
     text-transform: initial;
@@ -358,15 +358,21 @@ ion-item {
   }
 
   .alert-button-confirm {
-    color:white;
+    color: white;
     background-color: var(--primary-500);
     border-color: var(--primary-500);
   }
 
   .alert-button-delete {
-    color:white;
+    color: white;
     background-color: var(--ion-color-danger);
     border-color: var(--ion-color-danger);
   }
 }
 
+ion-toast {
+  --max-width: calc(100% - 3rem);
+  --box-shadow: none;
+  --border-radius: 0.5rem;
+  margin-top: -1rem;
+}
