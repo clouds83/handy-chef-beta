@@ -68,22 +68,19 @@ export class AddRecipePage implements OnInit {
   initializeForm() {
     this.form = new FormGroup({
       id: new FormControl(this.recipeId),
-      name: new FormControl('asndioadsn', {
+      name: new FormControl(null, {
         updateOn: 'change',
         validators: [Validators.required, Validators.maxLength(64)],
       }),
-      servings: new FormControl(64, {
+      servings: new FormControl(null, {
         updateOn: 'change',
       }),
-      time: new FormControl(99, {
+      time: new FormControl(null, {
         updateOn: 'change',
       }),
-      instructions: new FormControl(
-        'Loremmmmmmmm lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas lkas ',
-        {
-          updateOn: 'change',
-        }
-      ),
+      instructions: new FormControl(null, {
+        updateOn: 'change',
+      }),
       image: new FormControl(null, {
         updateOn: 'change',
       }),

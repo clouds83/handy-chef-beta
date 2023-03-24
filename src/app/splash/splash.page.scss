@@ -1,0 +1,38 @@
+ion-content::part(background) {
+  background: rgb(156, 245, 83);
+  background: linear-gradient(
+    180deg,
+    rgba(156, 245, 83, 1) 0%,
+    rgba(133, 225, 58, 1) 50%
+  );
+}
+
+div {
+  display: flex;
+  height: 100%;
+  padding-bottom: 30%;
+  align-items: center;
+  justify-content: center;
+}
+
+.fade-in {
+  -webkit-animation: fade-in 600ms cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 600ms cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

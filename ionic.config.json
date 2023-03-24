@@ -1,7 +1,8 @@
 {
   "name": "handy-chef",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
