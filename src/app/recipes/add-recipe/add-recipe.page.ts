@@ -27,7 +27,6 @@ export class AddRecipePage implements OnInit {
   step: number = 1;
   form!: FormGroup;
   ingredientList: Ingredient[] = [];
-
   recipeId = uuidv4();
 
   isUpdating = false;
@@ -81,6 +80,7 @@ export class AddRecipePage implements OnInit {
       instructions: new FormControl(null, {
         updateOn: 'change',
       }),
+      instructionsPragraphs: this.fb.array([]),
       image: new FormControl(null, {
         updateOn: 'change',
       }),
@@ -92,6 +92,10 @@ export class AddRecipePage implements OnInit {
     return this.form.get('ingredients') as FormArray;
   }
 
+  get instructionsParagraphsFormArray(): FormArray {
+    return this.form.get('instructionsPragraphs') as FormArray;
+  }
+
   nextStep() {
     this.step = ++this.step;
   }
@@ -99,15 +103,6 @@ export class AddRecipePage implements OnInit {
   previousStep() {
     this.step = --this.step;
   }
-
-  // isImageLoaded!: boolean;
-  // onImageLoad() {
-  //   this.isImageLoaded = true;
-  // }
-
-  // onImageError() {
-  //   this.isImageLoaded = false;
-  // }
 
   async onAddIngredient() {
     const modal = await this.modalCtrl.create({
@@ -158,8 +153,20 @@ export class AddRecipePage implements OnInit {
     });
   }
 
+  convertTextareaToParagraphs() {
+    const paragraphs: string[] = this.form.value.instructions.split('\n');
+
+    paragraphs.forEach((item) => {
+      this.form.value.instructionsPragraphs.push(item);
+    });
+  }
+
   async onSaveRecipe() {
     this.pushIngredientsToFormArray(this.ingredientList);
+
+    if (this.form.value.instructions) {
+      this.convertTextareaToParagraphs();
+    }
 
     if (this.isUpdating) {
       this.recipeService.updateRecipe(this.updatingRecipe.id, this.form.value);

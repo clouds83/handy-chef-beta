@@ -20,13 +20,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    SplashScreen.hide();
-    this.initializeApp();
+    // SplashScreen.hide();
+    //this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.router.navigateByUrl('splash');
-    });
-  }
+  // initializeApp() {
+  //   this.platform.ready().then(() => {
+  //     this.router.navigateByUrl('splash');
+  //   });
+  // }
+  // initializeApp() {
+  //   this.platform.ready().then(async () => {
+  //     SplashScreen.hide();
+  //   });
+  // }
 }

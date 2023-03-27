@@ -24,128 +24,10 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <form [formGroup]="form" (ngSubmit)="onSaveRecipe()">
   <ion-content>
-    <div [ngClass]="{'hide' : step !== 1}">
-      <h2 class="sub-title">General</h2>
-
-      <ion-list mode="ios" lines="none">
-        <ion-item class="input-item" counter="true">
-          <ion-label position="stacked">Recipe name (required)</ion-label>
-          <ion-input
-            id="name"
-            formControlName="name"
-            maxlength="64"
-            class="custom-input"
-            placeholder="e.g. Grandma's Special Pizza"
-          ></ion-input>
-        </ion-item>
-
-        <ion-item class="input-item">
-          <ion-label position="stacked">Number of servings</ion-label>
-          <ion-input
-            id="servings"
-            formControlName="servings"
-            inputmode="numeric"
-            type="number"
-            class="custom-input"
-            placeholder="How many portions does this make?"
-          ></ion-input>
-        </ion-item>
-
-        <ion-item class="input-item">
-          <ion-label position="stacked">Preparation time in minutes</ion-label>
-          <ion-input
-            id="time"
-            formControlName="time"
-            inputmode="numeric"
-            type="number"
-            class="custom-input"
-            placeholder="e.g. 120 (meaning 2 hours)"
-          ></ion-input>
-        </ion-item>
-
-        <ion-item class="input-item" counter="true">
-          <ion-label position="stacked">Instructions</ion-label>
-          <ion-textarea
-            maxlength="1024"
-            formControlName="instructions"
-            class="custom-input"
-            [autoGrow]="true"
-            [rows]="6"
-            placeholder="Step-by-step instructions for preparing the recipe"
-          ></ion-textarea>
-        </ion-item>
-      </ion-list>
-    </div>
-
-    <div [ngClass]="{'hide' : step !== 2}">
-      <h2 class="sub-title">Image</h2>
-
-      <ion-list class="images-container">
-        <ion-radio-group formControlName="image">
-          <ion-row>
-            <ion-col>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/pizza.jpg" />
-                <ion-label position="stacked">Pizza</ion-label>
-                <ion-radio slot="end" value="pizza"></ion-radio>
-              </ion-item>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/burguer.jpg" />
-                <ion-label position="stacked">Burguer</ion-label>
-                <ion-radio slot="end" value="burguer"></ion-radio>
-              </ion-item>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/dessert.jpg" />
-                <ion-label position="stacked">Dessert</ion-label>
-                <ion-radio slot="end" value="dessert"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/breakfast.jpg" />
-                <ion-label position="stacked">Breakfast</ion-label>
-                <ion-radio slot="end" value="breakfast"></ion-radio>
-              </ion-item>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/main.jpg" />
-                <ion-label position="stacked">Main dish</ion-label>
-                <ion-radio slot="end" value="main"></ion-radio>
-              </ion-item>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/side.jpg" />
-                <ion-label position="stacked">Side dish</ion-label>
-                <ion-radio slot="end" value="side"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/baked.jpg" />
-                <ion-label position="stacked">Baked</ion-label>
-                <ion-radio slot="end" value="baked"></ion-radio>
-              </ion-item>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/soup.jpg" />
-                <ion-label position="stacked">Soup</ion-label>
-                <ion-radio slot="end" value="soup"></ion-radio>
-              </ion-item>
-              <ion-item lines="none">
-                <ion-img src="../../../assets/images/drink.jpg" />
-                <ion-label position="stacked">Drink</ion-label>
-                <ion-radio slot="end" value="drink"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-radio-group>
-      </ion-list>
-    </div>
-
-    <div [ngClass]="{'hide' : step !== 3}" class="ingredients-step">
+    <div [ngClass]="{'hide' : step !== 1}" class="ingredients-step">
       <div class="centered-content" *ngIf="ingredientList.length === 0">
         <ion-button
           fill="clear"
@@ -270,16 +152,130 @@
         </ion-item>
       </ion-list>
     </div>
+
+    <div [ngClass]="{'hide' : step !== 2}">
+      <h2 class="sub-title">Image</h2>
+      <p class="small-text">Select the image that best fits the recipe</p>
+      <ion-list class="images-container">
+        <ion-radio-group formControlName="image">
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/pizza.jpg" />
+                <ion-label position="stacked">Pizza</ion-label>
+                <ion-radio slot="end" value="pizza"></ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/burguer.jpg" />
+                <ion-label position="stacked">Burguer</ion-label>
+                <ion-radio slot="end" value="burguer"></ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/dessert.jpg" />
+                <ion-label position="stacked">Dessert</ion-label>
+                <ion-radio slot="end" value="dessert"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/breakfast.jpg" />
+                <ion-label position="stacked">Breakfast</ion-label>
+                <ion-radio slot="end" value="breakfast"></ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/main.jpg" />
+                <ion-label position="stacked">Main dish</ion-label>
+                <ion-radio slot="end" value="main"></ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/side.jpg" />
+                <ion-label position="stacked">Side dish</ion-label>
+                <ion-radio slot="end" value="side"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/baked.jpg" />
+                <ion-label position="stacked">Baked</ion-label>
+                <ion-radio slot="end" value="baked"></ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/soup.jpg" />
+                <ion-label position="stacked">Soup</ion-label>
+                <ion-radio slot="end" value="soup"></ion-radio>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-img src="../../../assets/images/drink.jpg" />
+                <ion-label position="stacked">Drink</ion-label>
+                <ion-radio slot="end" value="drink"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+
+    <div [ngClass]="{'hide' : step !== 3}">
+      <h2 class="sub-title">General</h2>
+
+      <ion-list mode="ios" lines="none">
+        <ion-item class="input-item" counter="true">
+          <ion-label position="stacked">Recipe name (required)</ion-label>
+          <ion-input
+            id="name"
+            formControlName="name"
+            maxlength="64"
+            class="custom-input"
+            placeholder="e.g. Grandma's Special Pizza"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="input-item">
+          <ion-label position="stacked">Number of servings</ion-label>
+          <ion-input
+            id="servings"
+            formControlName="servings"
+            inputmode="numeric"
+            type="number"
+            class="custom-input"
+            placeholder="How many portions does this make?"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="input-item">
+          <ion-label position="stacked">Preparation time in minutes</ion-label>
+          <ion-input
+            id="time"
+            formControlName="time"
+            inputmode="numeric"
+            type="number"
+            class="custom-input"
+            placeholder="e.g. 120 (meaning 2 hours)"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item class="input-item" counter="true">
+          <ion-label position="stacked">Instructions</ion-label>
+          <ion-textarea
+            maxlength="1024"
+            formControlName="instructions"
+            class="custom-input"
+            [autoGrow]="true"
+            [rows]="6"
+            placeholder="Step-by-step instructions for preparing the recipe"
+          ></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </div>
   </ion-content>
 
   <ion-footer class="ion-no-border">
     <ng-container *ngIf="step == 1">
-      <ion-button
-        expand="block"
-        (click)="nextStep()"
-        [disabled]="!form.get('name')?.valid"
-        class="main-button"
-      >
+      <ion-button expand="block" (click)="nextStep()" class="main-button">
         Next
         <svg
           width="12"
