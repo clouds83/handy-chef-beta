@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.clouds.handychef;
 
 import com.getcapacitor.BridgeActivity;
 
