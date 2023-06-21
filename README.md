@@ -48,7 +48,7 @@ Additionally, the PRO version provides a secure way to store recipes. Unlike a l
 
 Unfortunately, due to security reasons, I am unable to share the repository of this application, as it contains sensitive data such as my Firebase key. However, I have deployed the project as a web app, leveraging the compatibility between Ionic and Angular. Please note that although this app is designed for mobile devices, the layout may appear spread out on a monitor.
 
-You can test the hosted project at the following link: https://handy-chef-v2-clouds83.vercel.app/
+You can test the hosted project at the following link: https://handy-chef-pro-clouds83.vercel.app/
 
 Please be aware that the application is still in production, and there may be bugs or issues that arise during testing.
 
